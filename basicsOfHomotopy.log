@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.8.3-191112-2.6 (utf8.sjis) (TeX Live 2020/W32TeX) (preloaded format=platex 2020.4.7)  30 APR 2024 21:47
+This is e-pTeX, Version 3.14159265-p3.8.3-191112-2.6 (utf8.sjis) (TeX Live 2020/W32TeX) (preloaded format=platex 2020.4.7)  1 MAY 2024 00:12
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -292,52 +292,52 @@ LaTeX Font Info:    ... okay on input line 23.
 LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 23.
 LaTeX Font Info:    ... okay on input line 23.
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 16.60605pt on input line 26.
+(Font)              scaled to size 16.60605pt on input line 27.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 16.60605pt on input line 26.
+(Font)              scaled to size 16.60605pt on input line 27.
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 11.53198pt on input line 26.
+(Font)              scaled to size 11.53198pt on input line 27.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 11.53198pt on input line 26.
+(Font)              scaled to size 11.53198pt on input line 27.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 5.76599pt on input line 26.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 26.
+(Font)              scaled to size 5.76599pt on input line 27.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 27.
 (c:/w32tex/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 26.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 27.
 (c:/w32tex/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 11.53198pt on input line 26.
+(Font)              scaled to size 11.53198pt on input line 27.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 7.68799pt on input line 26.
+(Font)              scaled to size 7.68799pt on input line 27.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 5.76599pt on input line 26.
+(Font)              scaled to size 5.76599pt on input line 27.
 
 LaTeX Warning: No \author given.
 
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 27.
+(Font)              scaled to size 8.64899pt on input line 28.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 27.
+(Font)              scaled to size 8.64899pt on input line 28.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 27.
+(Font)              scaled to size 8.64899pt on input line 28.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 27.
+(Font)              scaled to size 8.64899pt on input line 28.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 9.60999pt on input line 30.
+(Font)              scaled to size 9.60999pt on input line 31.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 9.60999pt on input line 30.
+(Font)              scaled to size 9.60999pt on input line 31.
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 13.83836pt on input line 30.
+(Font)              scaled to size 13.83836pt on input line 31.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 13.83836pt on input line 30.
+(Font)              scaled to size 13.83836pt on input line 31.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 13.83836pt on input line 30.
+(Font)              scaled to size 13.83836pt on input line 31.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 13.83836pt on input line 30.
+(Font)              scaled to size 13.83836pt on input line 31.
 (c:/Users/M.Endo/Documents/数学と物理/PDF/自作/ホモトピー論の基本/basicsOfHomotopy.toc
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
 (Font)              scaled to size 6.72699pt on input line 2.
@@ -352,21 +352,33 @@ LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 \openout5 = `basicsOfHomotopy.toc'.
 
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 11.53198pt on input line 32.
-(c:/Users/M.Endo/Documents/数学と物理/PDF/自作/ホモトピー論の基本/basicsOfHomotopy.ind [1
+(Font)              scaled to size 11.53198pt on input line 33.
+LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
+(Font)              scaled to size 6.72699pt on input line 39.
+LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
+(Font)              scaled to size 5.76599pt on input line 39.
+[1
 
-] [2] [3
+]
+File: I^2.png Graphic file (type bmp)
+<I^2.png>
+File: defOfHomotopyGroup_composition.png Graphic file (type bmp)
+<defOfHomotopyGroup_composition.png>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[2] (c:/Users/M.Endo/Documents/数学と物理/PDF/自作/ホモトピー論の基本/basicsOfHomotopy.ind [3] [4
 
 
 
 ]) (c:/Users/M.Endo/Documents/数学と物理/PDF/自作/ホモトピー論の基本/basicsOfHomotopy.aux) ) 
 Here is how much of TeX's memory you used:
- 4770 strings out of 481139
- 59197 string characters out of 5919417
- 342421 words of memory out of 5000000
- 20707 multiletter control sequences out of 15000+600000
- 555199 words of font info for 129 fonts, out of 8000000 for 9000
+ 4783 strings out of 481139
+ 59494 string characters out of 5919417
+ 344421 words of memory out of 5000000
+ 20714 multiletter control sequences out of 15000+600000
+ 555577 words of font info for 131 fonts, out of 8000000 for 9000
  934 hyphenation exceptions out of 8191
- 30i,6n,27p,369b,321s stack positions out of 5000i,500n,10000p,500000b,80000s
+ 30i,8n,27p,718b,321s stack positions out of 5000i,500n,10000p,500000b,80000s
 
-Output written on c:/Users/M.Endo/Documents/数学と物理/PDF/自作/ホモトピー論の基本/basicsOfHomotopy.dvi (3 pages, 6564 bytes).
+Output written on c:/Users/M.Endo/Documents/数学と物理/PDF/自作/ホモトピー論の基本/basicsOfHomotopy.dvi (4 pages, 14856 bytes).
