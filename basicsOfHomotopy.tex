@@ -1,0 +1,54 @@
+\documentclass[a4paper,11pt]{jsarticle}
+
+
+\usepackage{amsmath,amsthm,amsfonts,float,cases,bm,amssymb,amssymb,ascmac}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[all]{xy}
+\usepackage{makeidx}
+\makeindex
+
+\setlength{\textwidth}{\fullwidth}
+\setlength{\textheight}{40\baselineskip}
+\addtolength{\textheight}{\topskip}
+\setlength{\voffset}{-0.55in}
+
+\newtheorem{thm}{定理}[section]
+\newtheorem{cor}[thm]{系}
+\newtheorem{dfn}[thm]{定義}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{rem}[thm]{注意}
+\newtheorem{eg}[thm]{例}
+
+
+\begin{document}
+
+\title{ホモトピー論の基本について}
+\maketitle
+\begin{abstract}
+  ホモトピー論の基本について網羅的に書いたものではなく，勉強中に特に注意して考えたことをまとめたもの．
+\end{abstract}
+\tableofcontents
+\section{ホモトピー群}
+\subsection{相対ホモトピー群の2種類の定義}
+$I^n$の部分空間$J^n$を\index{$J^n$}$J^n:=\partial I^{n-1}\times I\cup I^{n-1}\times\{0\}$と定める．$n=1,\ 2,\ 3$の場合を書けば形がわかる．$n=1$の場合$\{0\}$，$n=2$の場合上が空いたコの字型（$\sqcup$），$n=3$の場合上の開いた箱型である．
+
+\index{きてんつきくうかんつい@基点付き空間対}\textgt{基点付き空間対}$(X,A,*)$とは空間対$(X,A)$と$A$の点$*\in A$の組のことである．このとき，$n>0$に対し$(X,A,*)$の\index{ほもとぴーぐん@($n$次)ホモトピー群}\textgt{$n$次ホモトピー群}$\pi_n(X,A,*)$を3対のホモトピー集合\[
+  \pi_n(X,A,*):=[(I^n,\partial I^n,J^n),(X,A,*)]
+\]と定める．
+\subsection{Hurewiczの定理}
+\subsection{Freudenthalの懸垂定理}
+\subsection{Whiteheadの定理}
+\section{局所係数の（コ）ホモロジー}
+\subsection{局所系の2種類の定義}
+\subsection{局所係数の（コ）ホモロジーの計算例}
+\section{障害理論}
+\subsection{CW複体上の写像を延ばせるかどうかのcriterion}
+\subsection{E-M空間}
+
+\printindex
+
+
+
+
+
+\end{document}
