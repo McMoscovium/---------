@@ -1,10 +1,28 @@
 \documentclass[a4paper,11pt]{jsarticle}
 
 
-\usepackage{amsmath,amsthm,amsfonts,float,cases,bm,amssymb,amssymb,ascmac}
+\usepackage{amsmath,amsthm,amsfonts,float,cases,bm,amssymb,amssymb,ascmac,url,color}
 \usepackage[dvipdfmx]{graphicx}
 \usepackage[all]{xy}
 \usepackage{makeidx}
+\usepackage[bbgreekl]{mathbbol}
+\usepackage[%
+ dvipdfmx,% 欧文ではコメントアウトする
+ setpagesize=false,%
+ bookmarks=true,%
+ bookmarksdepth=tocdepth,%
+ bookmarksnumbered=true,%
+ colorlinks=false,%
+ pdftitle={},%
+ pdfsubject={},%
+ pdfauthor={},%
+ pdfkeywords={}%
+]{hyperref}
+% PDFのしおり機能の日本語文字化けを防ぐ((u)pLaTeXのときのみかく)
+\usepackage{pxjahyper}
+\DeclareMathSymbol{\bbepsilon}{\mathord}{bbold}{"0F}
+
+
 \makeindex
 
 \setlength{\textwidth}{\fullwidth}
@@ -12,6 +30,7 @@
 \addtolength{\textheight}{\topskip}
 \setlength{\voffset}{-0.55in}
 
+\theoremstyle{definition}
 \newtheorem{thm}{定理}[section]
 \newtheorem{cor}[thm]{系}
 \newtheorem{dfn}[thm]{定義}
@@ -19,21 +38,88 @@
 \newtheorem{rem}[thm]{注意}
 \newtheorem{eg}[thm]{例}
 
+\DeclareMathOperator{\Hom}{\mathrm{Hom}}
+\DeclareMathOperator{\id}{\mathrm{id}}
+
+\setcounter{tocdepth}{3}%目次に表示する数字の深さ
+\setcounter{section}{-1}
 
 \begin{document}
 \date{}
 \title{ホモトピー論の基本について}
 
 \maketitle
+
 \begin{abstract}
-  ホモトピー論の基本について網羅的に書いたものではなく，勉強中に特に注意して考えたことをまとめたもの．
+  ホモトピー論の基本について網羅的に書いたものではなく，勉強中に特に注意して考えたことをまとめたもの．構成は\cite{fomenko2016homotopical}\cite{whitehead2012elements}に依る．
 \end{abstract}
+
 \tableofcontents
+
+%section 1
+\section{準備}
+%subsection 1
+\subsection{記号}
+
+\cite{whitehead2012elements}ではほかの教科書とちょっとずつ違う記号を使っていてわかりにくいのでここにまとめておく．このPDFでは\cite{whitehead2012elements}以外でよく見る記法を使う．
+
+\begin{itemize}
+  \item $I$: 単位閉区間．空間対$(I,0)$も$I$とかく．\cite{whitehead2012elements}では$(I,0)$のことを$\mathbf{T}$とかく．
+  \item $(X,x_0)\vee (Y,y_0)$: 空間の\index{うぇっじわ@ウェッジ和}ウェッジ和．\index{xveey@$X\vee Y$}$X\vee Y$ともかく．
+  \item \index{k@$k\colon X\vee Y\to X\times Y$}$k\colon X\vee Y\to X\times Y$: $X\times\{y_0\}\cup\{x_0\}\times Y$の上への埋め込み．
+  \item \index{xwedgey@$X\wedge Y$}$X\wedge Y:=X\times Y/X\vee Y$ 空間のスマッシュ積（smash product, reduced join）．
+  \item \index{cx@$CX$（約錐）}$CX:=(I,0)\wedge (X,x_0)$: 点付き空間の\index{やくすい@約錐}\textgt{約錐}（reduced cone）．\cite{whitehead2012elements}では$\mathbf{T}X$とか$TX$とかかれる．
+  \item \index{sigmax@$\Sigma X$（約懸垂）}$\Sigma X:=S^1\wedge X$: 点付き空間の約懸垂（reduced suspension）．\cite{whitehead2012elements}では$SX$とかかれる．
+  \item \index{mapxy@$\mathrm{Map}(X,Y)$}$\mathrm{Map}(X,Y)=Y^X$: $X$から$Y$への連続写像全てを集めた空間．
+  \item $\mathrm{Path}(X):=X^I$: free path space. \cite{whitehead2012elements}では$\mathbf{F}X$とかかれる．
+  \item $\mathrm{Path}(X,x_0)$:=$(X,x_0)^{(I,0)}$: based path space. \cite{whitehead2012elements}では$\mathbf{P}X$とかかれる．
+\end{itemize}
+\subsection{toy modelとなる空間の例}
+\subsubsection{無限次元ユークリッド空間，無限次元球，無限次元射影空間}
+$K=\mathbb{R}$もしくは$\mathbb{C}$とする．inclusion\[
+\begin{array}{ccc}
+K^n                   & \longrightarrow & K^{n+1}               \\[-4pt]
+\rotatebox{90}{$\in$} &                 & \rotatebox{90}{$\in$} \\[-4pt]
+(x_1,\dots,x_n)       & \longmapsto     & (x_1,\dots,x_n,0)
+\end{array}
+\]により，空間の図式$K^0\to K^1\to \cdots$を得る．これのcolimitを
+\index{Rinfty@$\mathbb{R}^\infty$}
+\index{Cinfty@$\mathbb C^\infty$}
+\index{Kinfty@$K^\infty$}
+$K^\infty$と定める．また$K^\infty$は具体的に構成できる．\[K^\infty:=\{(a_n)_{n\ge 1}\in K^{\mathbb{Z}_{\ge 1}}\mid 有限個のnを除いてa_n=0\}\]
+と定め，$K^n$の元を最初の$n$成分に写す自然な単射の族$\{K^n\hookrightarrow K^\infty\}_{n\ge 1}$による\index{しゅういそう@終位相}終位相を入れる\footnote{終位相については\cite{nlab:weak_topology}を参照．}．\index{むげんじげんきゅうめん@無限次元球面}無限次元球面\index{Sinfty@$S^\infty$}$S^\infty$や\index{むげんじげんへいきゅう@無限次元閉球}無限次元閉球\index{Dinfty@$D^\infty$}$D^\infty$，\index{むげんじげんしゃえいくうかん@無限次元射影空間}無限次元射影空間\index{RPinfty@$\mathbb RP^\infty$}\index{CPinfty@$\mathbb CP^\infty$}$\mathbb RP^\infty,\ \mathbb CP^\infty$も同様に定める．
+\subsubsection{四元数射影空間}
+四元数環$\mathbb H$に対しても射影空間を同様に定められる．$\mathbb H^\times$の右からの積による左作用\footnote{四元数環は非可換なので，四元数射影空間というと右作用による商空間とする．}で$\mathbb H^{n+1}$を割ったものを\index{しげんすうしゃえいくうかん@四元数射影空間}四元数射影空間\index{HPn@$\mathbb HP^n$}$\mathbb HP^n$と定める．上と同様に\index{HPinfty@$\mathbb HP^\infty$}$\mathbb HP^\infty$を定められる．
+%subsection2 
+\subsection{空間に対する操作}
+\subsubsection{ウェッジ和（wedge sum）}
+\paragraph{定義}
+基点付き空間の族$\{(X_i,*_i)\}_{i\in I}$に対し，ウェッジ和$\bigvee_{i\in I}(X_i,*_i)=\bigvee_{i\in I}X_i$を，商空間\[
+  \bigvee_{i\in I}X_i:=\left.{\bigsqcup_{i\in I}X_i}\middle/{\bigsqcup_{i\in I}*_i}\right.
+\]
+と定める．また基点付き空間を1点空間からの射$*_i\colon *_i\to X_i$と思うと，それらの族のウェッジ和は圏$\mathrm{Top}$における図式\footnote{基点付き空間の圏$\mathrm{Top}_*$ではない．}のpushout
+\[
+  \xymatrix{
+  \bigsqcup_{i\in I}*_i \ar@{^{(}->}[r]^{(*_i)_{i\in I}} \ar[d] & \bigsqcup_{i\in I}X_i \ar[d]\\
+  \ast \ar[r]&\bigvee_{i\in I}X_i
+  }
+\]
+として圏論的に定義することもできる．
+%paragraph
+\paragraph{性質（写像のウェッジ積の構成）}図式のpushoutとしての定義を見ると，基点付き空間の「和」と思うことができる．基点を保つ連続写像の族$(f_i\colon X_i\to Y)_{i\in I}$が与えられると，ディスジョイント和の普遍性により連続写像$\bigsqcup_{i\in I}f_i\colon \bigsqcup_{i_in I}X_i\to Y$を得るが，さらにウェッジ和の普遍性により，次の図式を可換にする連続写像$\bigvee_{i\in I}f_i$を得る．
+\[
+\xymatrix{
+  \bigsqcup_{i\in I}*_i \ar@{^{(}->}[r] \ar[d] & \bigsqcup_{i\in I}X_i \ar[d]\ar[rdd]^{\bigsqcup_{i\in I}f_i}&\\
+  \ast \ar[r]\ar[rrd]&\bigvee_{i\in I}X_i\ar@{.>}[rd]|{\bigvee_{i\in I}f_i}&\\
+   & &Y
+}
+\]
+とくに，$I=\{1,2\}$の場合は$f_1\vee f_2$とかく．
 \section{ホモトピー群}
 \subsection{相対ホモトピー群の4種類の定義}
 4種類の相対ホモトピー群の定義を述べる．絶対バージョンに対しても同じことが言えるが，自然に同一視できるいろいろな定義をinterchangeablyに使えるようになりたい場面，例えば自分にとって慣れている定義とは異なる定義を採用している論文を読むときなどのために，各定義の関係を把握しておくと便利だと思う．また，幾何学的直感の働きやすい定義と，理論的に便利なabstractな定義の間の関係を把握しておくとabstractな対象に対する直感も育まれるとおもう．そのための備忘録，チートシートとしてこの小節を用意する．
 \paragraph{一つ目の定義（cubeを使った定義）}
-$I^n$の部分空間$J^n$を\index{$J^n$}$J^n:=\partial I^{n-1}\times I\cup I^{n-1}\times\{0\}$と定める．$n=1,\ 2,\ 3$の場合を書けばその形はわかる．$n=1$の場合$\{0\}$，$n=2$の場合上が空いたコの字型（$\sqcup$），$n=3$の場合上の開いた箱型である．
+$I^n$の部分空間$J^n$を\index{jn@$J^n$（$I^n$の部分空間）}$J^n:=\partial I^{n-1}\times I\cup I^{n-1}\times\{0\}$と定める．$n=1,\ 2,\ 3$の場合を書けばその形はわかる．$n=1$の場合$\{0\}$，$n=2$の場合上が空いたコの字型（$\sqcup$），$n=3$の場合上の開いた箱型である．
 
 \index{きてんつきくうかんつい@基点付き空間対}\textgt{基点付き空間対}$(X,A,*)$とは空間対$(X,A)$と$A$の点$*\in A$の組のことである．このとき，$n>0$に対し
 \footnote{$n=0$の場合でも定義は可能だが，$I^0={0},\ \partial I^0=\varnothing,\ J^0=\varnothing$ゆえ，絶対バージョンと同じになる．}
@@ -45,7 +131,7 @@ $(X,A,*)$の\index{ほもとぴーぐん@($n$次)ホモトピー群}\textgt{$n$�
 \]
 ホモトピー群の元の代表元は空間の3対の連続写像であるという条件から，その像は$n=2$の場合例えば以下の絵（この絵の場合，$D^2$と同相なものの絵を描いているつもりである．
 もちろんこんなにきれいに行かない場合がほとんどである！）のようになる．
-$J^n$を1点につぶすことにより空間の3対の同相$(I^n,\partial I^n,J^n)\cong(D^n,S^n,*)$を得るので．ホモトピー群はこの同相を通じて$[(D^n,S^n,*),(X,A,*)]$と同一視できる．
+$J^n$を1点につぶすことにより空間の3対の同相$(I^n,\partial I^n,J^n)\cong(D^n,S^{n-1},*)$を得るので．ホモトピー群はこの同相を通じて$[(D^n,S^{n-1},*),(X,A,*)]$と同一視できる．
 
 \begin{figure}[h]
   \centering
@@ -59,7 +145,7 @@ $f,g\colon (I^n,\partial I^n,J^n)\to (X,A,*)$に対し，その積$f\cdot g\colo
     &f(2t_1&&,t_2,\dots,t_n)\ \ &&(0&&\le t_1\le 1/2&&)\\
     &g(2t_1-1&&,t_2,\dots,t_n)\ \ &&(1/2&&\le t_1\le 1&&)
   \end{alignedat}\right.
-\]と定めると，写像空間$\mathrm{Map}((I^n,\partial I^n,J^n),(X,A,*))$に$H$-spaceの構造が入る（略）．よってホモトピー群に群の構造が入る．また$n\ge 3$なら$\pi_n(X,A)$はAbel群である．可換なことの証明は絶対バージョンと同様である．$n=2$だと可換とは限らないのはなぜか．$\pi_1(X)$が可換とは限らないという事実よりも非自明に思えるので，もう少しちゃんと考えたい（@TODO）．$X:=(D^2\vee D^2,S^1\vee S^1)$への2種類の標準的なinclusion\ $i_1,i_2\colon(D^2,S^1)\hookrightarrow X$の積$i_1\cdot i_2$と$i_2\cdot i_1$の間に基点を止めた相対ホモトピーがなさそうなのでそれで理解できそうだが$\dots$（これこそ障害理論の適用例として使える？）．
+\]と定めると，写像空間$\mathrm{Map}((I^n,\partial I^n,J^n),(X,A,*))$に$H$-spaceの構造が入る（略）．よってホモトピー群に群の構造が入る．また$n\ge 3$なら$\pi_n(X,A)$はAbel群である．可換なことの証明は絶対バージョンと同様である．$n=2$だと可換とは限らないのはなぜか．$\pi_1(X)$が可換とは限らないという事実よりも非自明に思えるので，もう少しちゃんと考えたい（@TODO）．$X:=(D^2\vee D^2,S^1\vee S^1)$への2種類の標準的なinclusion\ $i_1,i_2\colon(D^2,S^1)\hookrightarrow X$の積$i_1\cdot i_2$と$i_2\cdot i_1$の間に基点を止めた相対ホモトピーがなさそうなのでそれで理解できそうだが$\dots$（これこそ障害理論の適用例として使える？（2024/5/4追記 {\color{red}使えない}．普通に対のホモトピー完全列を使えば示せてしまう））．
 \begin{figure}[h]
   \centering
   \includegraphics{defOfHomotopyGroup_composition.png}
@@ -70,6 +156,27 @@ $f,g\colon (I^n,\partial I^n,J^n)\to (X,A,*)$に対し，その積$f\cdot g\colo
 \paragraph{四つ目の定義（homotopy fiberの$n-1$次ホモトピー群）}@TODO inclusion $A\hookrightarrow X$のホモトピーファイバーの$n-1$次ホモトピー群を$n$じ相対ホモトピー群として定める．loop spaceの性質をいくつか使えば三つ目のとほぼ同じに見える．
 \paragraph{すべての定義を自然に同一視できること}4つの定義によって作られた相対ホモトピー群の間に自然な同型を構成する．面倒だが，いろんな定義をinterchangeablyに使えることと，その間の同型を具体的に知っておくこと，また幾何学的に絵で理解できる定義とabstractに作られた定義の間の対応を具体的に見ておくことで，abstractな対象に対する直感ができることは重要だと思うのでやる．
 \subsection{Hurewiczの定理}
+\paragraph{Hurewicz homomorphism}定理に登場するHurewicz homomorphism $\rho\colon\pi_n(X,A)\to H_n(X,A)$の定義を述べる．$f\colon (D^n,S^{n-1})\to(X,A)$が$\alpha\in\pi_n(X,A)$を代表するとする\footnote{$f$は基点$*$を保つ写像だが，記法を短くするため$(D^n,S^{n-1},*)$等の「$*$」は略す．}．また，生成元$[D^n,S^{n-1}]\in H_n(D^n,S^{n-1})$を固定する．これは$(D^n,S^{n-1})$の向きを固定することと対応する．このとき，Hurewicz map $\rho\colon\pi_n(X,A)\to H_n(X,A)$を\[
+  \rho(\alpha):=f_*([D^n,S^{n-1}])
+\]と定める．ホモロジー論のホモトピー不変性により，この定義はwell-definedである．
+\begin{lem}
+  Hurewicz mapは準同型である．
+\end{lem}
+\begin{proof}
+  ホモトピー群の定義は，二つ目のものを採用する．$f,g\colon (D^n,S^{n-1})\to (X,A)$がそれぞれ$\alpha,\beta\colon\pi_n(X,A)$を代表するとする．このとき，\begin{align*}
+    \rho(\alpha\beta)&=\rho([f][g])\\
+    &=\rho([(f\vee g)\circ \mathrm{pinch}])\\
+    &=(f\vee g)_*\mathrm{pinch}_*(\sigma)
+  \end{align*}
+  である．ここで生成元$\sigma\in H_n(D^n,S^{n-1})\cong \mathbb{Z}$を一つ固定した．包含$i_1,i_2\colon (D^n,S^{n-1})\to (D^n\vee D^n,S^{n-1}\vee S^{n-1})$によりひきおこされる埋め込みにより，$H_n((D^n\vee D^n,S^{n-1}\vee S^{n-1}))\cong \mathbb{Z}\oplus \mathbb{Z}$の生成系$\sigma_1:=i_{1*}\sigma,\ \sigma_{2}:=i_{2*}\sigma$を得る．$\mathrm{pinch}_*(\sigma)=\pm\sigma_1\pm\sigma_2$となる（複号は$\mathrm{pinch}$のとりかたによる）．よって，\begin{align*}
+    \rho(\alpha\beta)&=(f\vee g)_*(\pm\sigma_1\pm\sigma_2)\\
+    &=\pm(f\vee g)_*i_{1*}\sigma\pm(f\vee g)_*i_{2*}\sigma\\
+    &=\pm((f\vee g)\circ i_1)_*\sigma\pm((f\vee g)\circ i_2)_*\sigma\\
+    &=\pm f_*\sigma\pm g_*\sigma\\
+    &=\rho(\alpha)+\rho(\beta)
+  \end{align*}
+  である\footnote{4つ目の等号は，$(f\vee g)\circ i_1=f$などから従う．$f\vee g$はウェッジ和の普遍性により引き起こされた写像なので，可換図式を追えばこのことは示せる．}．
+\end{proof}
 \subsection{Freudenthalの懸垂定理}
 \subsection{Whiteheadの定理}
 \section{局所係数の（コ）ホモロジー}
@@ -77,12 +184,33 @@ $f,g\colon (I^n,\partial I^n,J^n)\to (X,A,*)$に対し，その積$f\cdot g\colo
 \subsection{局所係数の（コ）ホモロジーの計算例}
 \section{障害理論}
 \subsection{CW複体上の写像を延ばせるかどうかのcriterion}
+$X$をCW-複体，$Y$を単連結な位相空間，$n\ge 0$とする．このとき，$n$-skeleton $X_n$上の連続写像$f_n\colon X_n\to Y$を$n+1$-skeleton $X_{n+1}$上に連続に延ばせるかという問題を考える．$(n+1)$-cell全体を$\{e_{\lambda}\}_{\lambda\in \Lambda_{n+1}}$とおき，各$\lambda\in\Lambda_{n+1}$に対し特性写像$\varphi_\lambda\colon (D^{n+1}_\lambda,S^n_\lambda)\to (X_{n+1},X_n)$を固定する．
+
+この状況において，$f_n$が$e_\lambda$に延びることは$f_n\circ\varphi_\lambda|_{S^n_\lambda}\colon S^n_\lambda\to Y$がnull-homotopicであることと等しく，また$\Leftrightarrow$ $[f_n\circ \varphi_\lambda|_{S^n_\lambda}]=0\in \pi_n(Y)$であることと等しい．したがって$f_n$が$X_{n+1}$に延びるための条件は，任意の$\lambda\in\Lambda_{n+1}$に対して，$[f_n\circ \varphi_\lambda|_{S^n_\lambda}]=0\in \pi_n(Y)$となることである．
+
+以上の構成により定まる写像$\Lambda_{n+1}\to \pi_n(Y)$は$X$のcellular cochain $\Tilde{\mathcal{O}}(f_n)\in C^{n+1}(X,\pi_n(Y))=\Hom_\mathbb{Z}(C_{n+1},\pi_n(Y))$を定める．
+
+\begin{lem}
+  $\tilde{\mathcal{O}}(f_n)$は特性写像$\{\varphi_\lambda\}_{\lambda\in\Lambda_{n+1}}$のとりかたに依らない．
+\end{lem}
+\begin{proof}
+  次の可換図式を使って$\tilde{\mathcal{O}}(f_n)$の構成を丁寧にみる．\[
+  \xymatrix{
+    &\bigoplus_\lambda\pi_n(S^n_\lambda)\ar[ld]_{\bigoplus_\lambda(\varphi_\lambda|_{S^n_\lambda})_*}\ar[rd]^{\bigoplus_\lambda\rho}&\\
+    \pi_n(X_n)\ar[r]^\rho & 
+    H_n(X_n)  & 
+    \bigoplus_\lambda H_n(S^n_\lambda)\ar[l]_{\bigoplus_\lambda(\varphi_\lambda|_{S^n_\lambda})_*}\\
+    \pi_{n+1}(X_{m+1},X_n)\ar[u]^{\partial}\ar[r]_\rho & 
+    H_{n+1}(X_{n+1},X_n)\ar[u]^\partial & 
+    \bigoplus_\lambda H_{n+1}(D^{n+1}_\lambda,S^n_\lambda)\ar[u]_\partial^\cong\ar[l]^{\bigoplus_\lambda (\varphi_\lambda)_*}_\cong
+  }\]
+  $\tilde{\mathcal{O}}(f_n)$は各$\lambda\in\Lambda_{n+1}$に対し$[\varphi_\lambda|_{S^n_\lambda}]=(\varphi_\lambda|_{S^n_\lambda})_*[\id_{S^n_\lambda}]$を対応させて準同型$\bigoplus_\lambda H_{n+1}(D^{n+1}_\lambda,S^n_\lambda)\to \pi_n(X_n)$をつくり，さらにそれを$(f_n)_*$で$\pi_n(Y)$に押し出してできた$\bigoplus_\lambda H_{n+1}(D^{n+1}_\lambda,S^n_\lambda)\to \pi_n(Y)$を，固定していた特性写像により定まる同型（右下矢印）で準同型
+\end{proof}
 \subsection{E-M空間}
 
+\bibliographystyle{alpha}
+\bibliography{bib}
+
 \printindex
-
-
-
-
 
 \end{document}
