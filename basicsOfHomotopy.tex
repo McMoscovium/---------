@@ -41,6 +41,7 @@
 
 \DeclareMathOperator{\Hom}{\mathrm{Hom}}
 \DeclareMathOperator{\id}{\mathrm{id}}
+\DeclareMathOperator{\Int}{\mathrm{Int}}
 
 \setcounter{tocdepth}{3}%目次に表示する数字の深さ
 \setcounter{section}{-1}
@@ -185,6 +186,7 @@ $f,g\colon (I^n,\partial I^n,J^n)\to (X,A,*)$に対し，その積$f\cdot g\colo
 \subsection{局所係数の（コ）ホモロジーの計算例}
 \section{障害理論}
 \subsection{CW複体上の写像を延ばせるかどうかのcriterion}
+\subsubsection{Obstruction Cocycle}
 $X$をCW-複体，$Y$を単連結な位相空間，$n\ge 0$とする．このとき，$n$-skeleton $X_n$上の連続写像$f_n\colon X_n\to Y$を$n+1$-skeleton $X_{n+1}$上に連続に延ばせるかという問題を考える．$(n+1)$-cell全体を$\{e_{\lambda}\}_{\lambda\in \Lambda_{n+1}}$とおき，各$\lambda\in\Lambda_{n+1}$に対し特性写像$\varphi_\lambda\colon (D^{n+1}_\lambda,S^n_\lambda)\to (X_{n+1},X_n)$を固定する．
 
 この状況において，$f_n$が$e_\lambda$に延びることは$f_n\circ\varphi_\lambda|_{S^n_\lambda}\colon S^n_\lambda\to Y$がnull-homotopicであることと等しく，また$\Leftrightarrow$ $[f_n\circ \varphi_\lambda|_{S^n_\lambda}]=0\in \pi_n(Y)$であることと等しい．したがって$f_n$が$X_{n+1}$に延びるための条件は，任意の$\lambda\in\Lambda_{n+1}$に対して，$[f_n\circ \varphi_\lambda|_{S^n_\lambda}]=0\in \pi_n(Y)$となることである．
@@ -227,6 +229,78 @@ $X$をCW-複体，$Y$を単連結な位相空間，$n\ge 0$とする．このと
 $\tilde{\mathcal{O}}(f_n)$をコホモロジー類に落としたものを$\mathcal{O}(f_n)$
 とかく．
 
+\subsubsection{Difference Cochain}
+単位区間$I$に標準的な胞体分割$I=\{0\}\cup \Int I\cup\{1\}$を与えておく．
+
+$f,g\colon X^{(n)}\to Y$，$f|_{X^{(n-1)}}$と$g|_{X^{(n-1)}}$をつなぐホモトピー$G\colon I\times X^{(n-1)}\to Y$が与えられたとする．このとき写像\index{Ffg@$F_{f,g}$}
+\[
+  F_{f,g}\colon (I\times X)^{(n)}=\{0,1\}\times X^{(n)}\cup\Int I\times X^{(n-1)}\to Y
+\]
+が$0\times X^{(n)}$上で$f$，$1\times X^{(n)}$上で$g$，$I\times X^{(n-1)}$上で$G$とすると定まる．このとき，$(f,g)$の$G$に関する\index{diffeence cochain}difference cochain $d(f,G,g)\in C^n(X,A;\pi_n(Y))$を，各$n$-cell $e$に対し，
+\[
+  d(f,G,g)(e):=\tilde{\mathcal{O}}(F_{f,g})(\Int I\times e)
+\]
+で定める．特別に$f|_{X^{(n-1)}}=g|_{X^{(n-1)}}$かつ$G$が定置のとき$d_{f,g}:=d(f,G,g)$とかく．
+
+\begin{prop}
+  （difference cochainはホモトピーの延長を見つける）上の状況で$d(f,G,g)=0$であることと，ホモトピー$G$が$I\times X^{(n)}$に延びることは同値である．
+\end{prop}
+\begin{proof}
+  まず，$I\times X^{(n-1)}\cup \{0,1\}\times X^{(n)}=(I\times X^{(n)})^{(n)}$ゆえ，$F_{f,g}$が$I\times X^{(n)}$に延びることは$\tilde{\mathcal{O}}(F_{f,g})=0\in C^{n+1}(I\times X^{(n)},I\times X^{(n-1)}\cup \{0,1\}\times X^{(n)};\pi_n(Y))$と同値であることに注意する．
+
+  $d(f,G,g)=0$とする．$I\times X^{(n)}$の$(n+1)$-cell $\Int I\times e$（$e$は$X$の$n$-cell）に対し，$\tilde{\mathcal{O}}(F_{f,g})(\Int I\times e)=d(f,G,g)(e)=0$である．$I\times X^{(n)}$の$(n+1)$-cellはすべて$\Int I\times e$の形であるから$\tilde{\mathcal{O}}(F_{f,g})=0$である．
+
+  $\tilde{\mathcal{O}}(F_{f,g})=0$とする．$X$の$n$-cell $e$を任意にとると$\Int I\times e$は$I\times X^{(n)}$の$(n+1)$-cellだから$d(f,G,g)(e)=\tilde{\mathcal{O}}(F_{f,g})(\Int I\times e)=0$ゆえ$d(f,G,g)=0$である．
+\end{proof}
+
+次の補題は$f\colon X^{(n)}\to Y$が与えられたとき，それとホモトピック rel. $X^{(n-1)}$な写像$g$をうまくとることで$C^n(X,A;\pi_n(Y))$の任意の元を表すことができるということを主張している．
+
+\label{representN-CochainAsDiffCochain}
+\begin{lem}（任意の$n$-cochainはdifference cochainで表せる） $f\colon X^{(n)}\to Y$, $d\in C^n(X,A;\pi_n(Y))$とするこ．このとき$X^{(n-1)}$上で$f$と一致する$g\colon X^{(n)}\to Y$で$d_{f,g}=d$となるようなものが存在する．
+\end{lem}
+\begin{proof}
+  （証明の気持ち）$d_{f,g}$は各$n$-cellに対して，$f\circ\varphi,g\circ\varphi$を球面$S^n$上で貼り合わせたもののホモトピー類が対応するように作るので，それが$d$に一致するようにするためには球面$S^n$の下半分を$f\circ\varphi$の定義域として使い，HEPを使って$\alpha$とホモトピックな写像になるように$S^n$上に延ばす．そうして伸ばした写像のうち$S^n$の上半分を使っているものを$g$とおく．\\
+
+
+  $g|_{X^{(n-1)}}=f|_{X^{(n-1)}}$だから，あとは各$n$-cell $e$上に$g$をのばす．特性写像$\varphi\colon(D^n,S^{n-1})\to (X^{(n)},X^{(n-1)})$を固定して，$d(e)=[\alpha]$なる$\alpha\colon (S^n,*)\to (Y,*)$をとる．ここで，球面は二つの閉球を赤道で張り合わせたもの$S^n=D^n_1\cup_{S^{n-1}}D^n_2$とみなす．
+
+  $f\circ \varphi\colon D^n_2\to Y$と$\alpha|_{D^n_2}$はnull-homotopicなので，$\alpha|_{D^n_2}$を$f\circ \varphi$につなぐホモトピー$h\colon D^n_2\to Y^I$がある．対$(S^n,D^n_2)$のHEPより，$h$は$\tilde{h}\colon S^n\to Y^I$に延びる．\[
+  \xymatrix{
+    D^n_2 \ar[r]^h \ar@{^{(}->}[d]
+    & Y^I \ar[d]^{\mathrm{ev}_0}\\
+    S^n \ar[r]_{\alpha} \ar@{.>}[ru]_{\tilde{h}}
+    & Y
+  }
+  \]
+  $e$上での$g$を合成\[
+    D^n_1\hookrightarrow S^n\xrightarrow{\tilde{h}}Y^I\xrightarrow{\mathrm{ev}_1}Y  
+  \]と定める．これが実際に$d_{f,g}=d$を与えることを示す．
+
+  $n$-cell $e$を任意にとる．このとき，$d_{f,g}(e)=[\mathrm{ev}_1\circ\tilde{h}]=[\alpha]=d(e)$である．一つ目のイコールは$h$の定義と$g$の定義による．2つ目のイコールは上の図式の右下の三角形が可換であることと$\alpha=\tilde{h}(\cdot)(0)\sim\tilde{h}(\cdot)(1)=\mathrm{ev}_1\circ \tilde{h}$からいえる．
+\end{proof}
+
+\begin{lem}
+  $\delta d(f,G,g)=\tilde{\mathcal{O}}(g)-\tilde{\mathcal{O}}(f)$
+\end{lem}
+\begin{proof}
+$d:=d(f,G,g)$，$F:=F_{f,g}$とかく．
+
+  各$e\in C_{n+1}(X,A)$に対し，\begin{align*}
+    \delta d(e)&=d(\partial e)\\
+    &=\tilde{\mathcal{O}}(F)(\Int I\times \partial e)
+  \end{align*}
+  である．ここで，$\tilde{\mathcal{O}}(F)$はcocycleゆえ，\begin{align*}
+    0&=\delta\tilde{\mathcal{O}}(F)(\Int I\times e)\\
+    &=\tilde{\mathcal{O}}(F)(\partial(\Int I\times e))\\
+    &=\tilde{\mathcal{O}}(F)(1\times e-0\times e-\Int I\times \partial e)
+  \end{align*}である．したがって，$e$の特性写像$\varphi$を一つ固定すると，\begin{align*}
+    \delta d(e)&=\tilde{\mathcal{O}}(F)(1\times e)-\tilde{\mathcal{O}}(F)(0\times e)\\
+    &=[g\circ\varphi|{S^n}]-[f\circ\varphi|{S^n}]\\
+    &=\tilde{\mathcal{O}}(g)(e)-\tilde{\mathcal{O}}(f)(e)
+  \end{align*}である．
+\end{proof}
+
+\subsubsection{コホモロジーのレベルでのobstruction}
 次の命題は，$X^{(n)}$上に延ばせる$X^{(n-1)}$上の写像がさらに$X^{(n+1)}$に延ばせる条件をコホモロジーの言葉で述べる．
 \begin{prop}
   $f_n\colon X^{(n)}\to Y$に対し，\[
@@ -234,7 +308,9 @@ $\tilde{\mathcal{O}}(f_n)$をコホモロジー類に落としたものを$\math
   \]である．
 \end{prop}
 \begin{proof}
-  
+  $\mathcal{O}(f_n)=0$とする．このときある$d\in C^{n}(X,A;\pi_{n}(Y))$が存在して，$\delta d=\tilde{\mathcal{O}}(f_n)$である．$X^{(n-1)}$上で$f_n$と一致する$g\colon X^{(n)}\to Y$を$d_{f_n,g}=-d$となるようにとる．$\tilde{\mathcal{O}}(g)=\delta d_{f_n,g}+\tilde{\mathcal{O}}(f_n)=\tilde{\mathcal{O}}(f_n)-\delta d=0$である．よって$g$は$X^{(n+1)}$に延びる．\\
+
+  逆に，$g\colon X^{(n)}\to Y$が$X^{(n-1)}$上で$f_n$と一致し，$X^{(n+1)}$に延びるとする．このとき$\tilde{\mathcal{O}}(g)=0$で，$\tilde{\mathcal{O}}(f_n)=\tilde{\mathcal{O}}(f_n)-\tilde{\mathcal{O}}(g)=-\delta d_{f_n,g}$ゆえ$\mathcal{O}(f_n)=0$である．
 \end{proof}
 \subsection{E-M空間}
 
