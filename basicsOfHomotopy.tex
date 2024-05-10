@@ -187,27 +187,27 @@ $f,g\colon (I^n,\partial I^n,J^n)\to (X,A,*)$に対し，その積$f\cdot g\colo
 \section{障害理論}
 \subsection{CW複体上の写像を延ばせるかどうかのcriterion}
 \subsubsection{Obstruction Cocycle}
-$X$をCW-複体，$Y$を単連結な位相空間，$n\ge 0$とする．このとき，$n$-skeleton $X_n$上の連続写像$f_n\colon X_n\to Y$を$n+1$-skeleton $X_{n+1}$上に連続に延ばせるかという問題を考える．$(n+1)$-cell全体を$\{e_{\lambda}\}_{\lambda\in \Lambda_{n+1}}$とおき，各$\lambda\in\Lambda_{n+1}$に対し特性写像$\varphi_\lambda\colon (D^{n+1}_\lambda,S^n_\lambda)\to (X_{n+1},X_n)$を固定する．
+$(X,A)$を相対CW-複体，$Y$を単連結な位相空間，$n\ge 0$とする．このとき，$n$-skeleton $X^{(n)}$上の連続写像$f_n\colon X^{(n)}\to Y$を$n+1$-skeleton $X^{(n+1)}$上に連続に延ばせるかという問題を考える．$(n+1)$-cell全体を$\{e_{\lambda}\}_{\lambda\in \Lambda_{n+1}}$とおき，各$\lambda\in\Lambda_{n+1}$に対し特性写像$\varphi_\lambda\colon (D^{n+1}_\lambda,S^n_\lambda)\to (X^{(n+1)},X^{(n)})$を固定する．
 
-この状況において，$f_n$が$e_\lambda$に延びることは$f_n\circ\varphi_\lambda|_{S^n_\lambda}\colon S^n_\lambda\to Y$がnull-homotopicであることと等しく，また$\Leftrightarrow$ $[f_n\circ \varphi_\lambda|_{S^n_\lambda}]=0\in \pi_n(Y)$であることと等しい．したがって$f_n$が$X_{n+1}$に延びるための条件は，任意の$\lambda\in\Lambda_{n+1}$に対して，$[f_n\circ \varphi_\lambda|_{S^n_\lambda}]=0\in \pi_n(Y)$となることである．
+この状況において，$f_n$が$e_\lambda$に延びることは$f_n\circ\varphi_\lambda|_{S^n_\lambda}\colon S^n_\lambda\to Y$がnull-homotopicであることと等しく，また$\Leftrightarrow$ $[f_n\circ \varphi_\lambda|_{S^n_\lambda}]=0\in \pi_n(Y)$であることと等しい．したがって$f_n$が$X^{(n+1)}$に延びるための条件は，任意の$\lambda\in\Lambda_{n+1}$に対して，$[f_n\circ \varphi_\lambda|_{S^n_\lambda}]=0\in \pi_n(Y)$となることである．
 
-以上の構成により定まる写像$\Lambda_{n+1}\to \pi_n(Y)$は$X$のcellular cochain $\Tilde{\mathcal{O}}(f_n)\in C^{n+1}(X,\pi_n(Y))=\Hom_\mathbb{Z}(C_{n+1},\pi_n(Y))$を定める．
+以上の構成により定まる写像$\Lambda_{n+1}\to \pi_n(Y)$は$X$のcellular cochain $\tilde{\mathcal{O}}(f_n)\in C^{n+1}(X,A;\pi_n(Y))=\Hom_\mathbb{Z}(C_{n+1}(X,A),\pi_n(Y))$を定める．
 
 \begin{prop}
   $\tilde{\mathcal{O}}(f_n)$は特性写像$\{\varphi_\lambda\}_{\lambda\in\Lambda_{n+1}}$のとりかたに依らない．
 \end{prop}
 \begin{proof}
-  次の図式を使って$\tilde{\mathcal{O}}(f_n)$の構成を丁寧にみる．ここで，$\rho$は生成元$[D^n,S^{n-1}]\in H_n(D^n,S^{n-1})$を固定して定められたHurewicz準同型である．\[
+  次の図式を使って$\tilde{\mathcal{O}}(f_n)$の構成を丁寧にみる．ここで，$\rho$は生成元$[D^n,S^{n-1}]\in H_n(D^n,S^{n-1})$を固定して定められたHurewicz準同型である．また，左下の$\rho$が同型だった場合のみ考える\footnote{$X^{(n)}$が単連結なら$\rho$は同型だが，そうでない場合は基本群の作用で相対ホモトピー群を割ったものから生える$\bar{\rho}$が同型になる．この場合でも同様にobstruction cochainを構成できる．\cite{whitehead2012elements}のV-5（p. 229）を参照．}．\[
   \xymatrix{
     &\bigoplus_\lambda\pi_n(S^n_\lambda)\ar[ld]_{\bigoplus_\lambda(\varphi_\lambda|_{S^n_\lambda})_*}\ar[rd]^{\bigoplus_\lambda\rho}_{\cong}&\\
-    \pi_n(X_n)\ar[r]^\rho & 
-    H_n(X_n)  & 
+    \pi_n(X^{(n)})\ar[r]^\rho & 
+    H_n(X^{(n)})  & 
     \bigoplus_\lambda H_n(S^n_\lambda)\ar[l]^{\bigoplus_\lambda(\varphi_\lambda|_{S^n_\lambda})_*}\\
-    \pi_{n+1}(X_{n+1},X_n)\ar[u]^{\partial}\ar[r]_\rho^{\cong} & 
-    H_{n+1}(X_{n+1},X_n)\ar[u]^\partial & 
+    \pi_{n+1}(X^{(n+1)},X^{(n)})\ar[u]^{\partial}\ar[r]_\rho^{\cong} & 
+    H_{n+1}(X^{(n+1)},X^{(n)})\ar[u]^\partial & 
     \bigoplus_\lambda H_{n+1}(D^{n+1}_\lambda,S^n_\lambda)\ar[u]_\partial^\cong\ar[l]^{\bigoplus_\lambda (\varphi_\lambda)_*}_\cong
   }\]
-  $\tilde{\mathcal{O}}(f_n)$とは何かというと，各$[D^{n+1}_\lambda,S^{n}_\lambda]\in H_{n+1}(D^{n+1}_\lambda,S^{n}_\lambda)$に対し$[\varphi_\lambda|_{S^n_\lambda}]=(\varphi_\lambda|_{S^n_\lambda})_*[\id_{S^n_\lambda}]$（最上段左の矢印による像）を対応させて準同型$\bigoplus_\lambda H_{n+1}(D^{n+1}_\lambda,S^n_\lambda)\to \pi_n(X_n)$をつくり，さらに最初に固定していた特性写像により定まる同型（最下段右の矢印）で引き戻した準同型を$(f_n)_*$で$\pi_n(Y)$に押し出してできた準同型のことである．$(f_n)_*$で押し出す前の準同型$H_{n+1}(X_{n+1},X_n)\to \pi_n(X^(n))$が特性写像のとりかたに依らないことを示せばよい．
+  $\tilde{\mathcal{O}}(f_n)$とは何かというと，各$[D^{n+1}_\lambda,S^{n}_\lambda]\in H_{n+1}(D^{n+1}_\lambda,S^{n}_\lambda)$に対し$[\varphi_\lambda|_{S^n_\lambda}]=(\varphi_\lambda|_{S^n_\lambda})_*[\id_{S^n_\lambda}]$（最上段左の矢印による像）を対応させて準同型$\bigoplus_\lambda H_{n+1}(D^{n+1}_\lambda,S^n_\lambda)\to \pi_n(X_n)$をつくり，さらに最初に固定していた特性写像により定まる同型（最下段右の矢印）で引き戻した準同型を$(f_n)_*$で$\pi_n(Y)$に押し出してできた準同型のことである．$(f_n)_*$で押し出す前の準同型$H_{n+1}(X^{(n+1)},X^{(n)})\to \pi_n(X^{(n)})$が特性写像のとりかたに依らないことを示せばよい．
 
   まず$H_{n+1}(D^{n+1}_\lambda,S^n_\lambda)$の元をとっておきながら最上段左の矢印による像を対応させてしまっているので，自然なやり方で$H_{n+1}(D^{n+1}_\lambda,S^n_\lambda)$と$\pi_n(S^n_\lambda)$の間の写像を作らないといけない．そこで作られたのが上の図式である．上と左の四角はHurewicz準同型が対のホモロジー完全列とホモトピー完全列の間の図式の準同型になっていることから，また，右の四角は対のホモトピー完全列の連結準同型の自然性から可換である．
 
@@ -311,6 +311,40 @@ $d:=d(f,G,g)$，$F:=F_{f,g}$とかく．
   $\mathcal{O}(f_n)=0$とする．このときある$d\in C^{n}(X,A;\pi_{n}(Y))$が存在して，$\delta d=\tilde{\mathcal{O}}(f_n)$である．$X^{(n-1)}$上で$f_n$と一致する$g\colon X^{(n)}\to Y$を$d_{f_n,g}=-d$となるようにとる．$\tilde{\mathcal{O}}(g)=\delta d_{f_n,g}+\tilde{\mathcal{O}}(f_n)=\tilde{\mathcal{O}}(f_n)-\delta d=0$である．よって$g$は$X^{(n+1)}$に延びる．\\
 
   逆に，$g\colon X^{(n)}\to Y$が$X^{(n-1)}$上で$f_n$と一致し，$X^{(n+1)}$に延びるとする．このとき$\tilde{\mathcal{O}}(g)=0$で，$\tilde{\mathcal{O}}(f_n)=\tilde{\mathcal{O}}(f_n)-\tilde{\mathcal{O}}(g)=-\delta d_{f_n,g}$ゆえ$\mathcal{O}(f_n)=0$である．
+\end{proof}
+\subsubsection{ホモトピーを延ばすときのobstruction}
+
+ホモトピーを延ばす時のobstructionはコホモロジーのレベルではどう書かれるか．相対CW-複体$(X,A)$に対し，$(\hat{X},\hat{A}):=(I,\partial I)\times(X,A)=(I\times X,\partial I\times X\cup I\times A)$とおく．$f,g\colon X\to Y$と$f|_{X^{(n-1)}}$を$g|_{X^{(n-1)}}$につなぐ$A$-ホモトピー$H\colon I\times X^{(n-1)}\to Y$が与えられたとする．このとき写像$F_{f,g}\colon \hat{X}^{(n)}\to Y$\footnote{$\hat{X}^{(n)}=\partial I\times X\cup I\times X^{(n-1)}$である．}が定まる．これが$\hat{X}^{(n+1)}$に延びる，すなわちホモトピー$H$が$I\times X^{(n)}$に延びるためのobstruction cocycle $\tilde{\mathcal{O}}(F_{f,g})\in C^{n+1}(\hat{X},\hat{A};\pi_n(Y))$が定まる．
+\begin{cor}
+  上の状況で$d(f,H,g)$はcocycleである．またそのコホモロジー類$D(f,H,g)\in H^{n}(X,A;\pi_n(Y))$が0であることは$H|_{I\times X^{(n-1)}}$が$I\times X^{(n+1)}$に延びることと同値である．
+\end{cor}
+\begin{proof}
+  まず，$f,g$はずでに$X^{(n+1)}$に延びているので，$\delta d(f|_{X^{(n)}},H,g|_{X^{(n)}})=\tilde{\mathcal{O}}(g|_{X^{(n)}})-\tilde{\mathcal{O}}(f|_{X^{(n)}})=0$である．
+
+  上の命題より，$\mathcal{O}(F_{f,g})=0$であることと$F_{f,g}$の$\{0,1\}\times X\cup I\times X^{(n+1)}$への延長$\tilde{F}$が（$F_{f,g}$とは$I\times (X^{(n)}-X^{(n-1)})$上で異なるかもしれないが）存在することは同値である．
+
+  $\mathcal{O}(F_{f,g})$と$D(f,H,g)$の対応を作る．3対$(I\times ,\partial I\times X\cup I\times A,1\times X\cup I\times A)$のホモロジー完全列\[
+    \leftarrow H^p(\partial I\times X\cup I\times A,1\times X\cup I\times A)
+    \leftarrow H^p(I\times X,1\times X\cup I\times A)
+    \leftarrow H^p(I\times X,\partial I\times X\cup I\times A)
+    \leftarrow
+  \]
+  を見る．HEPにより，$I\times X$は$1\times X\cup I\times A$にレトラクトするので，$H^p(I\times X,1\times X\cup I\times A)$は$p>0$で$0$である．よって，$p>0$に対し連結準同型は同型
+  \[
+    H^{p+1}(I\times X,\partial I\times X\cup I\times A)
+    \leftarrow H^p(\partial I\times X\cup I\times A,1\times X\cup I\times A)
+  \]
+  を与える．さらに，inclusion
+  \[
+    i\colon (0\times X,0\times A)\rightarrow (\partial I\times X\cup I\times A,1\times X\cup I\times A)
+  \]
+  が引き起こすコホモロジーの同型\footnote{両方の部分空間の方をつぶすと，ともに$X/A$になる}を合成すると自然な同型
+  \[
+    \partial^*\circ (i^*)^{-1}\colon H^p(X,A)\to H^{p+1}(\hat{X},\hat{A})
+  \]
+  を得る．
+
+  上の同型が対応$D(f,H,g)\mapsto \mathcal{O}(F_{f,g})$を与えることを見る（{\color{red}まだ示せてない！}）．
 \end{proof}
 \subsection{E-M空間}
 
