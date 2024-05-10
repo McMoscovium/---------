@@ -1,0 +1,146 @@
+\documentclass[a4paper,11pt]{jsarticle}
+
+
+\usepackage{amsmath,amsthm,amsfonts,float,cases,bm,amssymb,amssymb,ascmac,url,color}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[all]{xy}
+\usepackage{makeidx}
+\usepackage[bbgreekl]{mathbbol}
+\usepackage[%
+ dvipdfmx,% 欧文ではコメントアウトする
+ setpagesize=false,%
+ bookmarks=true,%
+ bookmarksdepth=tocdepth,%
+ bookmarksnumbered=true,%
+ colorlinks=false,%
+ pdftitle={},%
+ pdfsubject={},%
+ pdfauthor={},%
+ pdfkeywords={}%
+]{hyperref}
+% PDFのしおり機能の日本語文字化けを防ぐ((u)pLaTeXのときのみかく)
+\usepackage{pxjahyper}
+\DeclareMathSymbol{\bbepsilon}{\mathord}{bbold}{"0F}
+
+
+
+\setlength{\textwidth}{\fullwidth}
+\setlength{\textheight}{40\baselineskip}
+\addtolength{\textheight}{\topskip}
+\setlength{\voffset}{-0.55in}
+
+\theoremstyle{definition}
+\newtheorem{thm}{定理}[section]
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{dfn}[thm]{定義}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{rem}[thm]{注意}
+\newtheorem{eg}[thm]{例}
+
+\DeclareMathOperator{\Hom}{\mathrm{Hom}}
+\DeclareMathOperator{\id}{\mathrm{id}}
+\DeclareMathOperator{\Int}{\mathrm{Int}}
+
+\setcounter{tocdepth}{3}%目次に表示する数字の深さ
+\setcounter{section}{-1}
+
+\begin{document}
+\date{}
+\title{Obstruction Cochain}
+
+\maketitle
+
+\begin{abstract}
+  Obstruction cochainが特性写像のとりかたに依らないこと，およびそれがcocycleであることの証明
+\end{abstract}
+\tableofcontents
+\section{基本群のホモトピー群への作用}
+\subsection{便利な写像}
+$C_i$でinclusion $i\colon S^{n-1}\to D^n$のmapping cylinderを表すことにする．ただし，$CS^{n-1}=I\times S^{n-1}/~$の$1\times S^{n-1}$と$\partial D^n$を接着しているとする．同相写像$C_i\to D^n$を次のように作る．\[
+  \begin{alignedat}{2}
+  (t,x)&\mapsto \frac{2-t}{2}x&\ \ \ &((t,x)\in CS^{n-1})\\
+  x&\mapsto x/2&&(x\in D^n)
+\end{alignedat}
+\]これの逆を$b\colon D^n\to C_i$とおく．
+\subsection{基本群のホモトピー群への作用}
+\paragraph{絶対ホモトピー群への作用}
+G. W. WhiteheadのIII章を参照\footnote{一度立ち止まって，この文章を声に出して読め．}（この小節の内容よりも一般の状況でいろいろ書いてある）．
+
+$X$の点$x_1,x_0$を結ぶpath $\gamma\colon (I,0,1)\to (X,x_1,x_0)$の，ホモトピー群$\pi_n(X,x_0)$への作用を定める．spheroid\footnote{球面からの連続写像をspheroidと呼ぶことにする．}$f\colon (D^n,S^{n-1})\to (X,x_0)$に対し，$\tau_\gamma (f)\colon (D^n,S^{n-1})\to (X,x_1)$を$\tau_\gamma(f):=((\id_I\times \gamma)\cup f)\circ b$と定める\footnote{$f\colon CS^{n-1}\to X$と$g\colon D^n\to X$で，$f|_{1\times S^{n-1}}=g|_{\partial D^n}$を満たすものが引き起こす写像$C_i\to X$のことを$f\cup g$と書くことにする．}．
+\begin{lem}
+  $\gamma,\gamma'$が端点を止めてホモトピック，$f,f'$が基点を止めてホモトピックであるとする．このとき，$\tau_\gamma(f)$と$\tau_{\gamma'}(f')$は基点を止めてホモトピックである．
+\end{lem}
+\begin{proof}
+  $\gamma,\gamma'$のホモトピーを$h\colon I\times I\to X$，$f,f'$のホモトピーを$H\colon I\times D^n\to X$とおく．このとき，ホモトピー$\Phi\colon I\times D^n\to X$を，$\Phi_t:=((\id_I\times h_t)\cup H_t)\circ b$と定める．これを具体的に書くと
+  \[\begin{cases}
+    x\mapsto H(t,2x)&(0\le \|x\|\le 1/2)\\
+    x\mapsto (2-2\|x\|,h(t,x/\|x\|))&(1/2\le\|x\|\le 1)
+  \end{cases}
+  \]である．これは連続で，境界は基点にうつる．また$\Phi_0=\tau_\gamma(f)$，$\Phi_1=\tau_{\gamma'}(f')$である．
+\end{proof}
+この補題から，$\gamma$の端点を止めたホモトピー類$\alpha=[\gamma]$は写像$\tau_\alpha \colon\pi_n(X,x_0)\to \pi_n(X,x_1)$を定める．
+\paragraph{相対ホモトピー群への作用}
+$f\colon(D^n,S^{n-1},*)\to (X,A,x_0)$とpath $\gamma\colon (I,0,1)\to (A,x_1,x_0)$を任意にとる．$\tau'_\gamma(f)\colon (D^n,S^{n-1},*)\to (X,A,x_1)$を$\tau'_\gamma(f):=(\gamma\vee f)\circ b'$と定める．
+\begin{lem}
+  $\gamma,\gamma'$が端点を止めてホモトピック，$f,f'$が$\pi_n(X,A,x_0)$の同じ元を代表するとする．このとき，$\tau'_\gamma(f)$と$\tau'_{\gamma'}(f')$は$\pi_n(X,A,x_1)$の中で同じである．
+\end{lem}
+\begin{proof}
+  絶対バージョンの同じ補題とパラレルである．
+\end{proof}
+上の補題から，$\gamma$の端点を止めた$A$の中でのホモトピー類$\alpha$は写像$\tau'_\alpha\colon\pi_n(X,A,x_0)\to \pi_n(X,A,x_1)$を定める．
+\subsection{ホモトピー完全列との関係}
+基本群の作用が対のホモトピー完全列に引き起こす準同型を見る．inclusionの引き起こす準同型$j_*$を$j_*\colon\pi_n(X)\to \pi_n(X,A)$を，$j_*[f]:=[f\circ p]$と定める．ここで，$p$は$p\colon (D^n,S^{n-1})\to(D^n/S^{n-1},S^{n-1}/S^{n-1})=(S^n,*)$である．あとの$i_*$や$\partial_*$は自明なとおりである．
+
+\begin{thm}
+  $(X,A)$を空間対，$n\ge 0$とする．このとき各$[\gamma]=\alpha\in\pi_1(A)$に対し，次の図式は可換である．ただし，$\beta:=i_*\alpha$である．
+  \[
+    \xymatrix{
+      \ar[r]
+      &\pi_{n+1}(X,A)\ar[r]^{\partial_*}\ar[d]^{\tau'_\alpha}
+      &\pi_n(A)\ar[r]^{i_*}\ar[d]^{\tau_\alpha}
+      &\pi_n(X)\ar[r]^{j_*}\ar[d]^{\tau_\beta}
+      &\pi_n(X,A)\ar[r]\ar[d]^{\tau'_\alpha}
+      &\\
+      \ar[r]
+      &\pi_{n+1}(X,A)\ar[r]^{\partial_*}
+      &\pi_n(A)\ar[r]^{i_*}
+      &\pi_n(X)\ar[r]^{j_*}
+      &\pi_n(X,A)\ar[r]
+      &
+    }
+  \]
+\end{thm}
+\begin{proof}
+  （左の四角について）$[f]\in\pi_{n+1}(X,A)$を任意にとる．右上からたどる合成について，
+  \[
+    \tau_\alpha\partial_*[f]=\tau_\gamma(|_{S^n})=(\gamma\vee f|_{S^n})\circ b
+  \]
+  である．また，左下の合成は
+  \[
+    \partial_*\tau'_\alpha[f]=\partial_*((\gamma\vee f)\circ b')=(\gamma\vee f)\circ b=(\gamma\vee f|_{S^n})\circ b
+  \]だから左の四角は可換である．
+
+  （真ん中の四角について）$[f]\in \pi_n(A)$を任意にとる．右上からたどる合成について，
+  \[
+    \tau_\beta i_*[f]=\tau_{i_*\alpha}[f]=((i\circ\gamma)\vee f)\circ b=(\gamma\vee f)\circ b
+  \]
+  左下をたどる合成について，
+  \[
+    i_*\tau_\alpha[f]=i_*((\gamma\vee f)\circ b)=(\gamma\vee f)\circ b
+  \]よって真ん中は可換である．
+
+  （右の四角について）$[f]\in\pi_n(X)$を任意にとる．右上をたどる合成について，
+  \[
+    \tau'_\alpha j_*[f]=\tau'_\gamma(f\circ p)=(\gamma\vee (f\circ p))\circ b'
+  \]左下をたどる合成について，
+  \[
+    j_*\tau_\beta[f]=j_*\tau_\gamma(f)=j_*((\gamma\vee f)\circ b)=(\gamma\vee f)\circ b\circ p
+  \]
+\end{proof}
+\begin{lem}$\gamma*$は群準同型である．
+\end{lem}
+\begin{proof}
+  $[f],[g]\in \pi_n(X,x_1)$をとる．
+\end{proof}
+\end{document}
