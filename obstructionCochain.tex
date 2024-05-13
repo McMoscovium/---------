@@ -1,7 +1,7 @@
 \documentclass[a4paper,11pt]{jsarticle}
 
 
-\usepackage{amsmath,amsthm,amsfonts,float,cases,bm,amssymb,amssymb,ascmac,url,color}
+\usepackage{amsmath,amsthm,amsfonts,float,cases,bm,amssymb,amssymb,ascmac,url,color,enumerate}
 \usepackage[dvipdfmx]{graphicx}
 \usepackage[all]{xy}
 \usepackage{makeidx}
@@ -61,55 +61,100 @@
 \maketitle
 
 \begin{abstract}
-  Obstruction cochainが特性写像のとりかたに依らないこと，およびそれがcocycleであることの証明
+  Obstruction cochainが特性写像のとりかたに依らないこと，およびそれがcocycleであることの証明を述べた，しかし内容は{\HUGE\bfseries \color{red} 保証できない}ノートである．
 \end{abstract}
 \tableofcontents
 \section{基本群のホモトピー群への作用}
-\subsection{便利な写像}
-$C_i$でinclusion $i\colon S^{n-1}\to D^n$のmapping cylinderを表すことにする．ただし，$CS^{n-1}=I\times S^{n-1}/~$の$1\times S^{n-1}$と$\partial D^n$を接着しているとする．同相写像$C_i\to D^n$を次のように作る．\[
-  \begin{alignedat}{2}
-  (t,x)&\mapsto \frac{2-t}{2}x&\ \ \ &((t,x)\in CS^{n-1})\\
-  x&\mapsto x/2&&(x\in D^n)
-\end{alignedat}
-\]これの逆を$b\colon D^n\to C_i$とおく．
-\subsection{基本群のホモトピー群への作用}
-\paragraph{絶対ホモトピー群への作用}
-G. W. WhiteheadのIII章を参照\footnote{一度立ち止まって，この文章を声に出して読め．}（この小節の内容よりも一般の状況でいろいろ書いてある）．
+\subsection{Transport}
+この節と次の節はtammo tom Dieckを参考することにした．
 
-$X$の点$x_1,x_0$を結ぶpath $\gamma\colon (I,0,1)\to (X,x_1,x_0)$の，ホモトピー群$\pi_n(X,x_0)$への作用を定める．spheroid\footnote{球面からの連続写像をspheroidと呼ぶことにする．}$f\colon (D^n,S^{n-1})\to (X,x_0)$に対し，$\tau_\gamma (f)\colon (D^n,S^{n-1})\to (X,x_1)$を$\tau_\gamma(f):=((\id_I\times \gamma)\cup f)\circ b$と定める\footnote{$f\colon CS^{n-1}\to X$と$g\colon D^n\to X$で，$f|_{1\times S^{n-1}}=g|_{\partial D^n}$を満たすものが引き起こす写像$C_i\to X$のことを$f\cup g$と書くことにする．}．
+\paragraph{基本群へのホモトピー群への作用}
+$u\colon I\to X$, $f\colon(I^n,\partial I^n)\to (X,\gamma(0))$が与えられたとする．このとき，$u$は2つの定置写像$f|_{\partial I^n}=c_{\gamma(0)},\ c_{\gamma(1)}\colon \partial I^n\to X$の間のホモトピー$\hat u\colon \partial I^n\times I\to X$を引き起こす．$(I^n,\partial I^n)$はNDR-pairなのでホモトピー$\hat u$は初期条件を$f$として$I^n$上のホモトピー$U\colon I^n\times I\to X$に延ばせる．
+
+$U_1$は$f$とホモトピックで，とくにspheroid $U_1\colon (I^n,\partial I^n)\to (X,u(1))$を定める．$U$による境界$\partial I^n$の像は$u$に沿っているので，この$U_1$は$f$を$u$に沿って「ずらした」ものと思える．このpdfでのみ，$y_0,\ y_1\in Y$をつなぐ道$\alpha$と2つの写像$f\colon (X,x_0)\to (Y,y_0),\ g\colon (X,x_0)\to (Y,y_1)$に対し，$f,g$の間のホモトピー$h\colon X\times I\to Y$が$h(x_0,t)=\alpha(t)$を満たすとき，$h$を，$\alpha$に沿っていると呼ぶことにする．
+
+$u$としてループをとると$f$と$U_1$のcodomainは同じ基点を持つ．これによりホモトピー群への基本群の作用が定まることがこの後の議論によりわかる．まずは絶対ホモトピー群に絞って考える．
+\begin{prop}（絶対ホモトピー群に値を持つtransport functor）
+  \begin{enumerate}[(1)]
+    \item 対応$[f]=[U_0]\mapsto[U_1]$はwell-definedな準同型
+    \[
+      u_*\colon \pi_n(X,u(0))\to \pi_n(X,u(1))
+    \]
+    を定める．
+    \item $u_*$は$u$の基点を止めたホモトピー類にしかよらない．
+    \item $(v\cdot u)_*=v_*\circ u_*$\footnote{今回は，2つの道$u\colon x\to y,\ v\colon y\to z$に対し，それらの和の記号を$v\cdot u\colon x\to z$と書くことにする．}
+    \item 以上によりtransport functor $\Pi(X)\to \mathbf{Grp}$を得る．
+  \end{enumerate}
+\end{prop}
+\begin{proof}
+  HEPをいっぱい使う．あとは略（多分かかない）．
+\end{proof}
+
+相対バージョンも考える．$u\colon I\to {\color{red}A}$，$f\colon (I^n,\partial I^n,J^{n-1})\to (X,A,u(0))$が与えられたとする．やはり$u$はそれぞれ$u(0)$と$u(1)$に値を持つ2つの恒等写像$J^{n-1}\to X$の間のホモトピー$\hat u$を引き起こす．$(I^n,\partial I^n),\ (\partial I^n,J^{n-1})$はどちらもNDR-pairなので，$\hat u$は初期条件を$f$としてホモトピー$U\colon I^n \times I\to X$に延びる．
+
+\begin{prop}（相対ホモトピー群に値を持つtransport functor）
+  \begin{enumerate}[(1)]
+    \item 対応$[f]=[U_0]\mapsto[U_1]$はwell-definedな準同型
+    \[
+      u_*\colon \pi_n(X,A,u(0))\to \pi_n(X,A,u(1))
+    \]
+    を定める．
+    \item $u_*$は$u$の基点を止めたホモトピー類にしかよらない．
+    \item $(v\cdot u)_*=v_*\circ u_*$．
+    \item 以上によりtransport functor $\Pi(A)\to \mathbf{Grp}$を得る．
+  \end{enumerate}
+\end{prop}
+\begin{proof}
+  略（多分書かない）．
+\end{proof}
+
+以上の結果から，$u_*(f)$とは，$f$を初期条件とする$u$に沿ったホモトピー$h$に対する，$[h(-,1)]$のことである．また$f$と$g$の間に，$u$に沿ったホモトピーがあれば$u_*f=g$である．
+
+また，ホモトピー群への基本群の右作用
+\[
+  \beta\cdot\alpha:=\alpha_*(\beta)
+\]が定まる．
+
+Transport functorはもっと一般の状況でも定まる．\textbf{Set}に値を持つが．定義域がNDR-pair $(X,x_0)$なら同様にしてホモトピー集合に値を持つtransport functor $\Pi(Y)\to \mathbf{Set},\ y\to [(X,x_0),(Y,y_0)],\ \alpha\to \alpha_*$が定まる．
+
+\paragraph{連続写像の引き起こす準同型との関係}
 \begin{lem}
-  $\gamma,\gamma'$が端点を止めてホモトピック，$f,f'$が基点を止めてホモトピックであるとする．このとき，$\tau_\gamma(f)$と$\tau_{\gamma'}(f')$は基点を止めてホモトピックである．
+  写像$\alpha\colon (I,\partial I)\to (X,x_0)$, $f\colon (X,x_0)\to (Y,y_0)$に対し，次の図式
+\[
+  \xymatrix{
+    \pi_n(X,x_0)\ar[r]^{f_*}\ar[d]_{\alpha_*}&\pi_n(Y,y_0)\ar[d]^{(f\circ \alpha)_*}\\
+    \pi_n(X,x_0)\ar[r]_{f_*}&\pi_n(Y,y_0)
+  }
+\]
+は可換である．
 \end{lem}
 \begin{proof}
-  $\gamma,\gamma'$のホモトピーを$h\colon I\times I\to X$，$f,f'$のホモトピーを$H\colon I\times D^n\to X$とおく．このとき，ホモトピー$\Phi\colon I\times D^n\to X$を，$\Phi_t:=((\id_I\times h_t)\cup H_t)\circ b$と定める．これを具体的に書くと
-  \[\begin{cases}
-    x\mapsto H(t,2x)&(0\le \|x\|\le 1/2)\\
-    x\mapsto (2-2\|x\|,h(t,x/\|x\|))&(1/2\le\|x\|\le 1)
-  \end{cases}
-  \]である．これは連続で，境界は基点にうつる．また$\Phi_0=\tau_\gamma(f)$，$\Phi_1=\tau_{\gamma'}(f')$である．
+  $[\varphi]\in\pi_(X,x_0)$に対し，$[\psi]=\alpha_*[\varphi]$とおく．このとき，$f_*\alpha_*[\varphi]=[f\circ \psi]$である．また，$\psi$のとりかたより，ホモトピー$h\colon I^{n}\times I\to X$ with $h(x,t)=\alpha(t)\ \ (x\in \partial I^n)$がとれる．一方，$(f\circ \alpha)_*\circ f_*[\varphi]=(f\circ \alpha)_*[f\circ \varphi]$は$[f\circ \psi]$である．実際，$f\circ h$は，$f\circ \varphi$と$f\circ \psi$の，$\alpha$に沿ったホモトピーを与える．
 \end{proof}
-この補題から，$\gamma$の端点を止めたホモトピー類$\alpha=[\gamma]$は写像$\tau_\alpha \colon\pi_n(X,x_0)\to \pi_n(X,x_1)$を定める．
-\paragraph{相対ホモトピー群への作用}
-$f\colon(D^n,S^{n-1},*)\to (X,A,x_0)$とpath $\gamma\colon (I,0,1)\to (A,x_1,x_0)$を任意にとる．$\tau'_\gamma(f)\colon (D^n,S^{n-1},*)\to (X,A,x_1)$を$\tau'_\gamma(f):=(\gamma\vee f)\circ b'$と定める．
+相対バージョンもある．
 \begin{lem}
-  $\gamma,\gamma'$が端点を止めてホモトピック，$f,f'$が$\pi_n(X,A,x_0)$の同じ元を代表するとする．このとき，$\tau'_\gamma(f)$と$\tau'_{\gamma'}(f')$は$\pi_n(X,A,x_1)$の中で同じである．
+  写像$\alpha\colon (I,\partial I)\to (A,x_0)$, $f\colon (A,x_0)\to (B,y_0)$に対し，次の図式
+\[
+  \xymatrix{
+    \pi_n(A,x_0)\ar[r]^{f_*}\ar[d]_{\alpha_*}&\pi_n(Y,B,y_0)\ar[d]^{(f\circ \alpha)_*}\\
+    \pi_n(A,x_0)\ar[r]_{f_*}&\pi_n(Y,B,y_0)
+  }
+\]
+は可換である．
 \end{lem}
-\begin{proof}
-  絶対バージョンの同じ補題とパラレルである．
-\end{proof}
-上の補題から，$\gamma$の端点を止めた$A$の中でのホモトピー類$\alpha$は写像$\tau'_\alpha\colon\pi_n(X,A,x_0)\to \pi_n(X,A,x_1)$を定める．
+
 \subsection{ホモトピー完全列との関係}
-基本群の作用が対のホモトピー完全列に引き起こす準同型を見る．inclusionの引き起こす準同型$j_*$を$j_*\colon\pi_n(X)\to \pi_n(X,A)$を，$j_*[f]:=[f\circ p]$と定める．ここで，$p$は$p\colon (D^n,S^{n-1})\to(D^n/S^{n-1},S^{n-1}/S^{n-1})=(S^n,*)$である．あとの$i_*$や$\partial_*$は自明なとおりである．
+基本群の作用が対のホモトピー完全列に引き起こす準同型を見る．
 
 \begin{thm}
-  $(X,A)$を空間対，$n\ge 0$とする．このとき各$[\gamma]=\alpha\in\pi_1(A)$に対し，次の図式は可換である．ただし，$\beta:=i_*\alpha$である．
+  $(X,A,x_0)$を点付き空間対，$n\ge 0$とする．このとき各$[\gamma]=\alpha\in\pi_1(A)$に対し，次の図式は可換である．
   \[
     \xymatrix{
       \ar[r]
-      &\pi_{n+1}(X,A)\ar[r]^{\partial_*}\ar[d]^{\tau'_\alpha}
-      &\pi_n(A)\ar[r]^{i_*}\ar[d]^{\tau_\alpha}
-      &\pi_n(X)\ar[r]^{j_*}\ar[d]^{\tau_\beta}
-      &\pi_n(X,A)\ar[r]\ar[d]^{\tau'_\alpha}
+      &\pi_{n+1}(X,A)\ar[r]^{\partial_*}\ar[d]^{\alpha_*}
+      &\pi_n(A)\ar[r]^{i_*}\ar[d]^{\alpha_*}
+      &\pi_n(X)\ar[r]^{j_*}\ar[d]^{\alpha_*}
+      &\pi_n(X,A)\ar[r]\ar[d]^{\alpha_*}
       &\\
       \ar[r]
       &\pi_{n+1}(X,A)\ar[r]^{\partial_*}
@@ -121,35 +166,8 @@ $f\colon(D^n,S^{n-1},*)\to (X,A,x_0)$とpath $\gamma\colon (I,0,1)\to (A,x_1,x_0
   \]
 \end{thm}
 \begin{proof}
-  （左の四角について）$[f]\in\pi_{n+1}(X,A)$を任意にとる．右上からたどる合成について，
-  \[
-    \tau_\alpha\partial_*[f]=\tau_\gamma(|_{S^n})=(\gamma\vee f|_{S^n})\circ b
-  \]
-  である．また，左下の合成は
-  \[
-    \partial_*\tau'_\alpha[f]=\partial_*((\gamma\vee f)\circ b')=(\gamma\vee f)\circ b=(\gamma\vee f|_{S^n})\circ b
-  \]だから左の四角は可換である．
-
-  （真ん中の四角について）$[f]\in \pi_n(A)$を任意にとる．右上からたどる合成について，
-  \[
-    \tau_\beta i_*[f]=\tau_{i_*\alpha}[f]=((i\circ\gamma)\vee f)\circ b=(\gamma\vee f)\circ b
-  \]
-  左下をたどる合成について，
-  \[
-    i_*\tau_\alpha[f]=i_*((\gamma\vee f)\circ b)=(\gamma\vee f)\circ b
-  \]よって真ん中は可換である．
-
-  （右の四角について）$[f]\in\pi_n(X)$を任意にとる．右上をたどる合成について，
-  \[
-    \tau'_\alpha j_*[f]=\tau'_\gamma(f\circ p)=(\gamma\vee (f\circ p))\circ b'
-  \]左下をたどる合成について，
-  \[
-    j_*\tau_\beta[f]=j_*\tau_\gamma(f)=j_*((\gamma\vee f)\circ b)=(\gamma\vee f)\circ b\circ p
-  \]
+  連続写像の引き起こす準同型については可換性は上で確かめた．あとは左の四角についてにのみ確かめればよい．$f\colon (I^{n+1},\partial I^{n+1},J^n)\to (X,A,x_0)$を任意にとる．$\alpha_*[f]=[g]$なる$g\colon I^n\to X$をとる．このとき，$f$と$g$の$\gamma$に沿ったホモトピー$h\colon (I^{n+1},\partial I^{n+1},J^n)\times I\to (X,A,x_0)$がある．一方，$\alpha_*\partial_*[f]=\alpha_*[f|_{I^n\times 1}]$である．このとき，$h|_{I^n\times 1}\colon (I^n\times 1,\partial I^n\times 1)\to (A,x_0)$は，$f|_{I^n\times 1}$と$g|_{I^n\times 1}$の，$\gamma$に沿ったホモトピーを与える．よって，$\alpha_*\partial_*[f]=\alpha_*[f|_{I^n\times 1}]=[g|_{I^n\times 1}]=\partial_*[g]=\partial_*\alpha_*[f]$である．
 \end{proof}
-\begin{lem}$\gamma*$は群準同型である．
-\end{lem}
-\begin{proof}
-  $[f],[g]\in \pi_n(X,x_1)$をとる．
-\end{proof}
+\section{Hurewiczの定理}
+\section{Obstruction Cochainの定義}
 \end{document}
