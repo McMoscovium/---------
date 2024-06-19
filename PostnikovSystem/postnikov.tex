@@ -1,0 +1,142 @@
+\documentclass[a4paper,11pt]{jsarticle}
+
+\usepackage{amsmath,amsthm,amsfonts,float,cases,bm,amssymb,amssymb,ascmac,url,color}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[all]{xy}
+%\usepackage{makeidx}%これを使ったうえで\index{}を使わないとエラーになる
+\usepackage[bbgreekl]{mathbbol}
+\usepackage[%,
+dvipdfmx,% 欧文ではコメントアウトする
+setpagesize=false,%
+bookmarks=true,%
+bookmarksdepth=tocdepth,%
+bookmarksnumbered=true,%
+colorlinks=false,%
+pdftitle={},%
+pdfsubject={},%
+pdfauthor={},%
+pdfkeywords={}%
+]{hyperref}% PDFのしおり機能の日本語文字化けを防ぐ((u)pLaTeXのときのみかく)
+\usepackage{pxjahyper}
+\DeclareMathSymbol{\bbepsilon}{\mathord}{bbold}{"0F}
+
+
+%\makeindex%インデックスつかわないときにこれoffにしないとエラー出る
+
+\setlength{\textwidth}{\fullwidth}
+\setlength{\textheight}{40\baselineskip}
+\addtolength{\textheight}{\topskip}
+\setlength{\voffset}{-0.55in}
+
+\theoremstyle{definition}
+\newtheorem{thm}{定理}[section]
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{dfn}[thm]{定義}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{rem}[thm]{注意}
+\newtheorem{eg}[thm]{例}
+
+\DeclareMathOperator{\Hom}{\mathrm{Hom}}
+\DeclareMathOperator{\id}{\mathrm{id}}
+\DeclareMathOperator{\Int}{\mathrm{Int}}
+
+\setcounter{tocdepth}{3}%目次に表示する数字の深さ
+\setcounter{section}{-1}
+
+\begin{document}
+\date{}
+\title{Postnikov System}
+
+\maketitle
+
+%begin{abstract}
+%end{abstract}
+
+\tableofcontents
+
+\section{ホモトピーファイバー列}
+空間対やファイブレーションに対してホモトピー完全列が構成された．ここでは任意の連続写像に対してfibrant replacementを用いて，ファイブレーションに対するものと類似のホモトピー完全列を構成する．
+\paragraph{ファイブレーションに対するホモトピー完全列}
+$F\rightarrow E\rightarrow B$を基点付きファイブレーションとする．このとき，$k\ge 1$に対して$p_*\colon \pi_k(E,F)\to \pi_k(B)$が同型になるのだった．よって，対$(E,F)$のホモトピー完全列（下図上段）により，ファイブレーション$p$のホモトピー完全列（下図下段）を得る．
+\[\xymatrix{
+  \ar[r]&
+  \pi_k(F)\ar@{=}[d]\ar[r] &
+  \pi_k(E)\ar@{=}[d]\ar[r] &
+  \pi_k(E,F)\ar[d]_{\cong}^{p_*}\ar[r]^{\partial_*} &
+  \pi_{k-1}(F)\ar@{=}[d]\ar[r]&
+  \\
+  \ar[r]&
+  \pi_k(F)\ar[r] &
+  \pi_K(E)\ar[r]_{p_*} &
+  \pi_k(B)\ar[r]_{\Delta_*} &
+  \pi_{k-1}(F)\ar[r]&
+}\]
+ここで，$\Delta_*$は$\partial_*\circ (p_*)^{-1}$である．
+
+\paragraph{fibrant replacement}
+基点付き連続写像のホモトピー完全列を，ファイブレーションのホモトピー完全列を利用して作る．そのために，連続写像をファイブレーションに置き換える．
+\begin{thm}（fibrant replacement）
+  $f\colon (X,x_0)\to (Y,y_0)$を基点付き連続写像とする．また，\begin{align*}
+    E_f&:=\{(x,\gamma)\in X\times Y^I\mid f(x)=\gamma(0)\}\\
+    p_f&\colon E_f\to Y,\ (x,\gamma)\mapsto \gamma(1)\\
+    r_f&\colon E_f\to X,\ (x,\gamma)\mapsto x\\
+    F_f&:=p_f^{-1}(y_0)
+  \end{align*}
+  とおく．また$i_f$を包含$F_f\to E_f$，$\pi_f$を合成$r\circ i_f$とおく．
+  
+  このとき$p_f\colon (E_f,(x_0,c_{y_0}))\to(Y,y_0)$は基点付きファイブレーションで下の図式（特に下の三角形）はホモトピー可換である．
+  \[\xymatrix{
+    &&F_f\ar@{_(->}[d]^{i_f}\ar[lld]_{\pi_f}\\
+    X\ar[dr]_f & \ar@{}[ur]|{\circlearrowright}&E_f\ar[ll]^{r_f} \ar[dl]^{p_f}\\
+    &Y&
+  }\]
+\end{thm}
+  \begin{proof}
+    略．
+  \end{proof}
+  \begin{thm}$f\colon X\to Y$を基点付き連続写像とする．$Y$のpath fibrationを$f$で引き戻したものを$\pi'_f\colon F'_f\to X$とおく（左下図式）．このとき，右下の図式が可換になるような同相写像$\varphi\colon F_f\to F'_f$がある．
+    \[
+    \xymatrix{
+      F'_f\ar[d]_{\pi'_f}\ar[r]&P(Y,y_0)\ar[d]^{\mathrm{ev}_1}&F_f\ar[r]^{\varphi}_{\cong}\ar[d]_{\pi_f}&F'_f\ar[d]^{\pi'_f}\\
+      X\ar[r]_f&Y&X\ar@{=}[r]&X
+    }  
+    \]
+    特に，$\pi_f$はファイブレーションである．
+  \end{thm}
+  \begin{proof}
+    略．$F_f$と$F'_f$を具体的に書き下せば$\varphi$をどう作ればよいかわかる．
+  \end{proof}
+\paragraph{連続写像のホモトピー完全列}
+$f\colon (X,x_0)\to (Y,y_0)$を基点付き連続写像とし，$F:=\pi_f^{-1}(x_0)$（$\pi_f$は前段落のもの）とおき，$F$の$F_f$への包含を$j_f$とおく．$f$のfibrant replacement $p_f$のホモトピー完全列と$\pi_f$のホモトピー完全列を組み合わせて下の図式を得る．
+\[\xymatrix{
+  \ar[r]&
+  \pi_{k+1}(Y)\ar[r]^{\Delta_*}&
+  \pi_{k}(F_f)\ar[r]^{(i_f)_*}\ar@{=}[d]&
+  \pi_k(E_f)\ar[r]^{(p_f)_*}\ar[d]^{r_*}_{\cong}&
+  \pi_{k}(Y)\ar[r]^{\Delta_*}&
+  \pi_{k-1}(F_f)\ar[r]\ar@{=}[d]&
+  \\
+  \ar[r]&
+  \pi_k(F)\ar[r]_{(j_{f})_*}&
+  \pi_k(F_f)\ar[r]_{(\pi_f)_*}&
+  \pi_k(X)\ar[r]_{\Delta_*}\ar[ru]_{f_*}&
+  \pi_{k-1}(F)\ar[r]_{(j_{f})_*}&
+  \pi_{k-1}(F_f)\ar[r]&
+}\]
+上の図式の台形の部分以外は，連続写像のレベルでのホモトピー可換図式から引き起こされるので可換である．よって，完全列
+\[\xymatrix{
+  \ar[r]&
+  \pi_{k+1}(Y)\ar[r]^{\Delta_*}&
+  \pi_k(F_f)\ar[r]^{(\pi_f)_*}&
+  \pi_k(X)\ar[r]^{f_*}&
+  \pi_k(Y)\ar[r]^{\Delta_*}&
+  \pi_{k-1}(F_f)\ar[r]&
+}\]
+を得る．これを$f$のホモトピファイバー列という．
+\bibliographystyle{alpha}
+\bibliography{bib}
+
+%printindex
+
+\end{document}
