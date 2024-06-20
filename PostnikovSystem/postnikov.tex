@@ -1,6 +1,6 @@
 \documentclass[a4paper,11pt]{jsarticle}
 
-\usepackage{amsmath,amsthm,amsfonts,float,cases,bm,amssymb,amssymb,ascmac,url,color}
+\usepackage{amsmath,amsthm,amsfonts,float,cases,bm,amssymb,amssymb,ascmac,url,color,enumerate}
 \usepackage[dvipdfmx]{graphicx}
 \usepackage[all]{xy}
 %\usepackage{makeidx}%これを使ったうえで\index{}を使わないとエラーになる
@@ -50,13 +50,16 @@ pdfkeywords={}%
 
 \maketitle
 
-%begin{abstract}
-%end{abstract}
+\begin{abstract}
+  Griffiths-Morganの教科書のPostnikov Systemの構成がちゃんと条件を満たすことを示せなかった．主に$f_n$の引き起こすホモトピー群の準同型の記述に困難性があった．前回終盤の議論により，$K(\pi,n)$をcodomainにもつホモトピー集合$[X,K(\pi,n+1)]$と，$X$上のprincipal $K(\pi,n)$ファイブレーション（with a section）の同値類の対応，および同一視$K(\pi_n(X),n)=\pi_n(X)$の扱いに気を付けながら丁寧に構成を追う必要があると思われた．
+
+  これを解決するために，別の文献（G.W.Whitehead）でのPostnikov Systemの構成を見て，Eilenberg-MacLane空間の扱いを学ぶとともに，Griffiths-Morganで直面した$f_{n*}$を記述する手法を模索する．
+\end{abstract}
 
 \tableofcontents
 
 \section{ホモトピーファイバー列}
-空間対やファイブレーションに対してホモトピー完全列が構成された．ここでは任意の連続写像に対してfibrant replacementを用いて，ファイブレーションに対するものと類似のホモトピー完全列を構成する．
+空間対やファイブレーションに対してホモトピー完全列が構成された（河澄等を参照）．ここでは記号の準備もかねて任意の連続写像に対してfibrant replacementを用いて，ファイブレーションに対するものと類似のホモトピー完全列を構成する．
 \paragraph{ファイブレーションに対するホモトピー完全列}
 $F\rightarrow E\rightarrow B$を基点付きファイブレーションとする．このとき，$k\ge 1$に対して$p_*\colon \pi_k(E,F)\to \pi_k(B)$が同型になるのだった．よって，対$(E,F)$のホモトピー完全列（下図上段）により，ファイブレーション$p$のホモトピー完全列（下図下段）を得る．
 \[\xymatrix{
@@ -76,7 +79,7 @@ $F\rightarrow E\rightarrow B$を基点付きファイブレーションとする
 
 \paragraph{fibrant replacement}
 基点付き連続写像のホモトピーファイバー列を，ファイブレーションのホモトピー完全列を利用して作る．そのために，連続写像をファイブレーションに置き換える．
-\begin{thm}（fibrant replacement）
+\begin{thm}[fibrant replacement]
   $f\colon (X,x_0)\to (Y,y_0)$を基点付き連続写像とする．また，\begin{align*}
     E_f&:=\{(x,\gamma)\in X\times Y^I\mid f(x)=\gamma(0)\}\\
     p_f&\colon E_f\to Y,\ (x,\gamma)\mapsto \gamma(1)\\
@@ -93,22 +96,23 @@ $F\rightarrow E\rightarrow B$を基点付きファイブレーションとする
   }\]
 \end{thm}
   \begin{proof}
-    略．
+    略．玉木大のファイバー束とホモトピーを参照．
   \end{proof}
-  \begin{thm}$f\colon X\to Y$を基点付き連続写像とする．$Y$のpath fibrationを$f$で引き戻したものを$\pi'_f\colon F'_f\to X$とおく（左下図式）．このとき，右下の図式が可換になるような同相写像$\varphi\colon F_f\to F'_f$がある．
+  \begin{lem}$f\colon X\to Y$を基点付き連続写像とする．$Y$のpath fibrationを$f$で引き戻したものを$\pi'_f\colon F'_f\to X$とおく（左下図式）．このとき，右下の図式が可換になるような同相写像$\varphi\colon F_f\to F'_f$がある．
     \[
     \xymatrix{
       F'_f\ar[d]_{\pi'_f}\ar[r]&P(Y,y_0)\ar[d]^{\mathrm{ev}_1}&F_f\ar[r]^{\varphi}_{\cong}\ar[d]_{\pi_f}&F'_f\ar[d]^{\pi'_f}\\
       X\ar[r]_f&Y&X\ar@{=}[r]&X
     }  
     \]
-    特に，$\pi_f$はファイブレーションである．
-  \end{thm}
+    特に，$\pi_f$はファイブレーションであり，$\pi_f$と$\pi'_f$はX上で同型である．
+  \end{lem}
   \begin{proof}
     略．$F_f$と$F'_f$を具体的に書き下せば$\varphi$をどう作ればよいかわかる．
   \end{proof}
 \paragraph{連続写像のホモトピー完全列}
-$f\colon (X,x_0)\to (Y,y_0)$を基点付き連続写像とし，$F:=\pi_f^{-1}(x_0)$（$\pi_f$は前段落のもの）とおき，$F$の$F_f$への包含を$j_f$とおく．$f$のfibrant replacement $p_f$のホモトピー完全列と$\pi_f$のホモトピー完全列を組み合わせて下の図式を得る．
+\begin{thm}[ホモトピーファイバー列]
+  $f\colon (X,x_0)\to (Y,y_0)$を基点付き連続写像とし，$F:=\pi_f^{-1}(x_0)$（$\pi_f$は前段落のもの）とおき，$F$の$F_f$への包含を$j_f$とおく．$f$のfibrant replacement $p_f$のホモトピー完全列と$\pi_f$のホモトピー完全列を組み合わせて下の図式を得る．
 \[\xymatrix{
   \ar[r]&
   \pi_{k+1}(Y)\ar[r]^{\Delta_*}&
@@ -134,6 +138,85 @@ $f\colon (X,x_0)\to (Y,y_0)$を基点付き連続写像とし，$F:=\pi_f^{-1}(x
   \pi_{k-1}(F_f)\ar[r]&
 }\]
 を得る．これを$f$のホモトピファイバー列という．
+\end{thm}
+
+
+\section{Postnikov Systemの構成}
+
+\subsection{G. W. Whiteheadの教科書の構成}
+Griffiths-Morganの教科書にある構成で本当にPostnikov Syaytemの条件を満たすものが作れているかチェックしきれなかった．とくに$f_n$の引き起こすホモトピー群の同型の部分が示せなかった．
+
+そこでまず，G. W. Whiteheadの教科書にあるPostnikov systemの構成を詳しく調べる．これはGriffiths-Morganにあるものとは手順が少しだけ違う．まず，与えられた空間$X$に対し，$K(\pi_n(X),n)$-fibrationのタワーを先に作り，そのあとfibrationのsectionに対する障害理論を使わずに各$f_n\colon X\to X_n$を構成するという手を取っている．この構成とGriffiths-Morganの教科書の構成に類似点を見つけ，Griffiths-Morganの教科書の構成の方を理解しようとしてみる．
+\paragraph{$n$-connective fibration}
+$X$を弧状連結空間とする．このとき，$\pi_{n+1}(X)$の生成元に沿って$X$に$(n+2)$-cellを接着することで新たな空間$X'$で$\pi_{n+1}(X')=0$なるものが作れる．これを繰り返すことで$(n+1)$-連結な相対CW複体$(X^*,X)$であって$\pi_i(X^*)=0$ for $i\ge n+1$を満たすものが作れる．
+\[
+\xymatrix{
+  \ar[r]&
+  \pi_{k+1}(X^*)\ar[r]&
+  \pi_{k+1}(X^*,X)\ar[r]&
+  \pi_{k}(X)\ar[r]&
+  \pi_k(X^*)\ar[r]&
+  \pi_k(X^*,X)\ar[r]&
+  \pi_k(X)\ar[r]&
+}  
+\]
+さらに，包含$i\colon X\hookrightarrow X^*$に対し$X_n:=F_i$，$p_n:=\pi_i$とおく．記号はfibrant replacementの定義で使われているものに準ずる．$i$のファイバーホモトピー列より，ファイブレーション$p_n$は次を満たす．
+\[\xymatrix{
+  \ar[r]&
+  \pi_{k+1}(X^*)\ar[r]^{\Delta_*}&
+  \pi_k(X_n)\ar[r]^{p_{n*}}&
+  \pi_k(X)\ar[r]&
+  \pi_k(X^*)\ar[r]&
+}\]
+\begin{itemize}
+  \item $\pi_k(X^*)=\pi_{k+1}(X^*)=0$ for $k\ge n+1$ゆえ$p_{n*}$は$k\ge n+1$で同型．
+  \item $X^*$は$n+1$次元以下のセルを持たないので，包含準同型$\pi_{k}(X)\to \pi_k(X^*)$は$k\le n$で同型，$k=n+1$で全射．よって$X_n$は$n$-連結である．
+\end{itemize}
+以上をまとめると，次を得る．
+\begin{thm}[$n$-connective fibrationの存在]\label{existenceOfConnFib}
+  $X$を弧状連結空間とする．このとき，任意の$n>0$に対し，ファイブレーション$p_n\colon X_n\to X$で次を満たすものが存在する．
+  \begin{itemize}
+    \item $p_{n*}\colon \pi_k(X_n)\to \pi_k(X)$は$k\ge n+1$で同型．
+    \item $X_n$は$n$-連結．
+  \end{itemize}
+\end{thm}
+定理の条件を満たすファイブレーションを$n$-connective fibrationと呼ぶ．また，$\pi_i(Y)=0\ (i\le n)$を満たす空間$Y$を$n$-anticonnected spaceと呼ぶ．$X$を含む空間$X^*$が$n$-anticonnectedで$(X^*,X)$が$n$-connectedなら$X^*$を$X$の$n$-anticonnected extensionと呼ぶ．さらに加えて$(X^*,X)$が相対CW-複体で，$X^*$が$n$次元以下のセルを持たないとき，$X^*$は$X$のregular $n$-anticonnected extensionと呼ぶ．
+
+とくに，上の定理の$X_n$を構成するときに使った$X^*$は，$X$のregular $(n+1)$-anticonnected extensionである．
+
+以下いくつかの命題を用いて，\ref{existenceOfConnFib}で構成された$n$-connective fibrationのホモトピー一意性を示す．
+
+\begin{thm}[連続写像をそのanticonnected extensionに延ばすための十分条件と延長のホモトピー一意性]
+  $X^*\ (\mathrm{resp.\ }Y^*)$をそれぞれ$X\ (\mathrm{resp.\ }Y)$のregular $m\ (\mathrm{resp.\ }n)$-anticonnected extensionとし，$f\colon X\to Y$を連続写像とする．このとき次が成立する．
+  \begin{enumerate}[(1)]
+    \item $m\le n$ならば，$f$は$\tilde{f}\colon X^*\to Y^*$に延びる．
+    \item $m\le n+1$ならば，2つの延長$g,g'\colon X^*\to Y^*$はホモトピック(rel. $X$)である．
+  \end{enumerate}  
+\end{thm}
+\begin{proof}
+  \begin{enumerate}[(1)]
+    \item $X^*$は$n$次元以下のセルを持たないので，$f$は$n$-skeleton $(X^*)^{(n)}=X$に延びる．$f$を$(X^*)^{(k)}\to Y^*$に延長する障害類は$H^{k+1}(X^*,X;\pi_k(Y^*))=0$に属する（$k\ge n$）．よって$f$は$X^*$に延長する．
+    \item $g,g'$を$f$の延長とする．これらは$(X^*)^{(n)}$上で$f$に一致する．$k\le n+1$とする．$g,g'$のホモトピー(rel. $X$)を$X^{(k)}$に延ばすための障害類は$H^k(X^*,X;\pi_k(Y^*))=0$に属するので，$g,g'$はホモトピック(rel. $X$)である．
+  \end{enumerate}
+\end{proof}
+\begin{cor}[anticonnected extensionの一意性]
+$X^*,X'^*$をともに$X$のregular $n$-anticonnected extensionとする．このとき，$(X^*,X)$と$(X'^*,X)$はホモトピー同値である．
+\end{cor}
+\begin{proof}
+  定理で$m=n$としたものより，$X$上の恒等写像は$f\colon (X^*,X)\to (X'^*,X),\ g\colon (X'^*,X)\to (X^*,X)$に延びる．合成$f\circ g,\ g\circ f$はともに$X$上の恒等写像の延長だから，定理よりこれらは恒等写像にホモトピック(rel. $X$)である．よって対のホモトピー同値$(X^*,X)\simeq (X'^*,X)$を得る．
+\end{proof}
+\begin{cor}[\ref{existenceOfConnFib}で構成された$n$-connective fibrationの一意性]
+
+  $X^*,X'^*$を，$X$のregular $(n+1)$-connected extensionとする．$p\colon \Tilde{X}\to X,\ p'\colon \tilde{X'}\to X$をそれぞれ定理\ref{existenceOfConnFib}で構成した$n$-connective fibrationとする\footnote{つまり，$p$は$X^*$のpath fibrationのinclusionによる引き戻しである．}．このとき，$p,p'$はファイバーホモトピー同値である．
+\end{cor}
+\begin{proof}
+  $f\colon (X^*,X)\to (X'^*,X),\ g\colon (X'^*,X)\to (X^*,X)$をそれぞれ$\id_X$の延長とする．$f_*$を$f$が誘導するpointed path space\footnote{$X^*$と$X'^*$の基点は共通の部分集合$X$の点を取ることにする．}上の射$PX^*\to PX'^*$とするとpullbackの普遍性より$f_1\colon \tilde{X}\to\tilde{X'}$が伸びる．
+  \[\xymatrix{
+    \tilde{X}\ar@{.>}[dr]^{f_1}\ar[ddr]_{p}\ar[rr]^{\mathrm{pr}_2}&&PX^*\ar[d]^{f_*}\\
+    & \tilde{X'}\ar[d]_{p'}\ar[r]&PX'^*\ar[d]^{\mathrm{ev_1}}\\
+    &X\ar@{^(->}[r]&X'^*
+  }\]同様にして$g_1\colon \tilde{X'}\to\tilde{X}$を得る．$H\colon X^*\times I\to X^*$を$\id_{X^*}$と$g\circ f$のホモトピー(rel. $X$)とすると，$H_1((x,\gamma),t):=(x,H(\gamma(-),t))$によりホモトピー$H_1\colon\tilde{X}\times I\to \tilde X$が定まる．これは$\id_{\tilde{X}}$と$g_1\circ f_1$の，$X$上のホモトピーである．同様に，$\id_{\tilde{X'}}$と$f_1\circ g_1$の$X$上のホモトピーもあるので，$p$と$p'$はファイバーホモトピー同値である．
+\end{proof}
 \bibliographystyle{alpha}
 \bibliography{bib}
 
